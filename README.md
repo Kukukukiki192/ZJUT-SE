@@ -2,7 +2,7 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/Kukukukiki192/ZJUT-SE)
 
-> [📚各大高校课程资源汇总](https://github.com/nwuzmedoutlook/university)   ![](https://github.githubassets.com/favicons/favicon.png)[浙江工业大学课程攻略共享计划](https://github.com/zjutjh/zjut-icicles/tree/main)   ![](http://www.gdjw.zjut.edu.cn/jwglxt/logo/favicon.ico?t=1734945806827)[浙江工业大学教学综合信息服务平台](http://www.gdjw.zjut.edu.cn)
+> [📚各大高校课程资源汇总](https://github.com/nwuzmedoutlook/university)   :octocat:[浙江工业大学课程攻略共享计划](https://github.com/zjutjh/zjut-icicles/tree/main)   <img src="http://www.gdjw.zjut.edu.cn/jwglxt/logo/favicon.ico?t=1734945806827" width="20">[浙江工业大学教学综合信息服务平台](http://www.gdjw.zjut.edu.cn)
 
 本仓库是本科专业期间的学习内容集合，包括课程作业、试卷、实验、项目代码、设计文档、报告及部分学习笔记、教材、教学视频等
 
@@ -297,6 +297,7 @@
     <td><a href="https://github.com/Kukukukiki192/ZJUT-SE/tree/main/大四/实习就业/求职">求职</a></td>
   </tr>
 </table>
+
 ## 项目汇总
 
 大一下
