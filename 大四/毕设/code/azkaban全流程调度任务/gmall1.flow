@@ -1,0 +1,40 @@
+nodes:
+  - name: hdfs_to_ods
+    type: command
+    config:
+      command: /home/k/bin/hdfs_to_ods.sh ${dt}
+ 
+  - name: ods_to_dwd
+    type: command
+    dependsOn: 
+      - hdfs_to_ods
+    config: 
+      command: /home/k/bin/ods_to_dwd.sh ${dt}
+ 
+  - name: dwd_to_dws
+    type: command
+    dependsOn:
+      - ods_to_dwd
+    config:
+      command: /home/k/bin/dwd_to_dws1.sh ${dt}
+ 
+  - name: dws_to_dwt
+    type: command
+    dependsOn:
+      - dwd_to_dws
+    config:
+      command: /home/k/bin/dws_to_dwt1.sh ${dt}
+
+  - name: dwt_to_ads
+    type: command
+    dependsOn: 
+      - dws_to_dwt
+    config:
+      command: /home/k/bin/dwt_to_ads1.sh ${dt}
+
+  - name: hdfs_to_mysql
+    type: command
+    dependsOn:
+      - dwt_to_ads
+    config:
+      command: /home/k/bin/hdfs_to_mysql1.sh all
