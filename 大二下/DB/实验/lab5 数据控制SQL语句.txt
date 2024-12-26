@@ -1,0 +1,93 @@
+/*授权
+GRANT <权限>[，<权限>]…
+[ON<对象类型><对象名>]
+TO <用户>[,<用户>]…
+[WITH GRANT OPTION]；
+说明：该语句将指定操作对象的指定操作权限授予指定的用户
+(获得这个权限的用户可把这种权限再授予其他的用户)
+*/
+1.
+GRANT SELECT
+ON Zhukx_Courses
+TO PUBLIC
+
+SELECT * FROM Zhukx_Courses
+
+SELECT * FROM Zhukx_Students
+2.
+GRANT INSERT,UPDATE
+ON Zhukx_Students
+TO User1
+WITH GRANT OPTION
+3.
+GRANT INSERT,UPDATE(zkx_Score),SELECT(zkx_Tno,zkx_Cno,zkx_Score)
+ON Zhukx_Reports
+TO User2
+
+INSERT
+INTO Zhukx_Reports
+VALUES('S01','T01','C02',100)
+
+UPDATE Zhukx_Reports
+SET zkx_Cno='C01'
+WHERE zkx_Score=88
+
+SELECT * FROM Zhukx_Reports
+4.
+GRANT INSERT,UPDATE
+ON Zhukx_Students
+TO User2
+WITH GRANT OPTION
+
+//User1
+INSERT		
+INTO Zhukx_Students
+VALUES('S11','张三','ZS@zjut.edu.cn',32.1,'男')
+
+UPDATE Zhukx_Students
+SET zkx_Scredit=30
+WHERE zkx_Sno='S11'
+
+//User2
+INSERT		
+INTO Zhukx_Students
+VALUES('S12','李四','LS@zjut.edu.cn',18.1,'男')
+
+UPDATE Zhukx_Students
+SET zkx_Scredit=18.4
+WHERE zkx_Sno='S12'
+
+/*收回权限
+REVOKE<权限>[，<权限>]…
+[ON<对象类型><对象名>]
+FROM<用户>[，<用户>]…；
+收回授权的级联反应：
+对于授予其他用户权限的用户，收回权限的操作会级联
+*/
+5.
+REVOKE SELECT
+ON Zhukx_Courses
+FROM User1
+6.
+//User2
+GRANT INSERT,UPDATE
+ON Zhukx_Students
+TO User3
+WITH GRANT OPTION
+
+REVOKE INSERT,UPDATE
+ON Zhukx_Students
+FROM User3
+
+//User3
+GRANT INSERT,UPDATE
+ON Zhukx_Students
+TO User1
+WITH GRANT OPTION
+
+//DBA
+REVOKE INSERT,UPDATE
+ON Zhukx_Students
+FROM User1
+cascade//级联删除
+

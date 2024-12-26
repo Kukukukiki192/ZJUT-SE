@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+      "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+      "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+   <session-factory>
+    <!-- 指定数据库连接参数 -->
+    <property name="connection.driver_class">
+com.mysql.jdbc.Driver</property>
+    <property name="connection.url">
+jdbc:mysql://127.0.0.1:3306/webstore
+</property>
+    <property name="connection.username">root</property>
+    <property name="connection.password">12345</property>
+        <!-- 指定JDBC 连接池 (use the built-in) -->
+    <property name="connection.pool_size">1</property>
+    <!-- 指定SQL 方言 -->
+    <property name="dialect">
+       org.hibernate.dialect.MySQL5Dialect
+    </property>
+    <!-- 打开Hibernate自动会话上下文管理 -->
+    <property name="current_session_context_class">thread</property>
+    <!-- 关闭二级缓存 -->
+    <property name="cache.provider_class">
+       org.hibernate.cache.NoCacheProvider
+    </property>
+        <!-- 指定将所有执行的SQL语句回显到stdout -->
+    <property name="show_sql">true</property>
+    <!-- 指定在启动时对表进行检查 -->
+    <property name="hibernate.hbm2ddl.auto">validate</property>
+    <!-- 指定映射文件，若有多个映射文件，使用多个mapping元素指定 -->
+      <mapping resource="com/entity/Student.hbm.xml"/>
+      <mapping resource="com/model/User.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

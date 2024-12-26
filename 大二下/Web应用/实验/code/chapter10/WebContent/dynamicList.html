@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dynamically Filling Lists</title>
+<script type="text/javascript">
+var xmlHttp;
+function createXMLHttpRequest() {
+    if (window.XMLHttpRequest) {
+         xmlHttp = new XMLHttpRequest();
+     }else{
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+}
+
+function refreshNameList() { 
+    var syear = document.getElementById("syear").value;
+    var sclass = document.getElementById("sclass").value;
+    if(sclass == "" || syear == "") {
+        clearNameList();
+        return;
+    }
+    var url = "refreshNameList.do?"
+            + createQueryString(sclass, syear) + "&ts=" + new Date().getTime();
+    createXMLHttpRequest();
+    xmlHttp.onreadystatechange = handleStateChange;
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+}
+function handleStateChange(){
+  if(xmlHttp.readyState == 4){
+     if(xmlHttp.status == 200){
+        updateNameList();
+     }
+  }
+} 
+function createQueryString(sclass, syear) {
+    var queryString = "sclass=" + sclass + "&syear=" + syear;
+    return queryString;
+}
+ 
+function updateNameList() {
+    clearNameList();
+    var snames = document.getElementById("snames");
+    var results = xmlHttp.responseXML.getElementsByTagName("sname");
+    var option = null;
+    for(var i = 0; i < results.length; i++) {
+        option = document.createElement("option");
+        option.appendChild
+ (document.createTextNode(results[i].firstChild.nodeValue));
+        snames.appendChild(option);
+    }
+}
+ 
+function clearNameList() {
+    var snames = document.getElementById("snames");
+    while(snames.childNodes.length > 0) {
+        snames.removeChild(snames.childNodes[0]);
+    }
+}
+</script>
+</head>
+<body>
+  <h4>请选择入学年份和班级</h4>
+  <form action="#">
+    入学年份:
+    <select id="syear" onchange="refreshNameList();">
+        <option value="">请选择</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+    </select>
+    班级:
+    <select id="sclass" onchange="refreshNameList();">
+        <option value="">请选择</option>
+        <option value="class1">一班</option>
+        <option value="class2">二班</option>
+    </select>
+    <br/><br/>
+    姓名: <br/>
+    <select id="snames" size="6" style="width:270px;">
+    </select>
+  </form>
+</body>
+</html>

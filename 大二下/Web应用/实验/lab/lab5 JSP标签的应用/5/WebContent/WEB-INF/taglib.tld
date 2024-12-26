@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee  http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+	<tlib-version>1.0</tlib-version>
+	<short-name>TagExample</short-name>
+	
+<!-- <tag>
+		<name>mathtag</name>
+		<tag-class>com.mytag.MathTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>num</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag> 
+-->
+	
+	<tag>
+		<name>mathtag</name>
+		<tag-class>tag.MathTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>x</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>mark</name>
+		<tag-class>tag.MarkTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>search</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>book</name>
+		<tag-class>tag.BookTag</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>search</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+</taglib>

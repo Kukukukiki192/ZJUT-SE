@@ -1,0 +1,36 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: 遗传算法(简化版） - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP4665.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /Fp"Debug/遗传算法(简化版）.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"F:\#AI 16-17-2\char 6 GA 17.3.31\6遗传算法求解TSP问题实验x11.5.27\遗传算法(简化版）.cpp"
+]
+Creating command line "cl.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP4665.tmp" 
+Creating temporary file "C:\Users\ADMINI~1\AppData\Local\Temp\RSP4666.tmp" with contents
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /incremental:yes /pdb:"Debug/遗传算法(简化版）.pdb" /debug /machine:I386 /out:"Debug/遗传算法(简化版）.exe" /pdbtype:sept 
+".\Debug\遗传算法(简化版）.obj"
+]
+Creating command line "link.exe @C:\Users\ADMINI~1\AppData\Local\Temp\RSP4666.tmp"
+<h3>Output Window</h3>
+Compiling...
+遗传算法(简化版）.cpp
+f:\#ai 16-17-2\char 6 ga 17.3.31\6遗传算法求解tsp问题实验x11.5.27\遗传算法(简化版）.cpp(255) : warning C4786: 'std::reverse_iterator<std::pair<double,std::vector<int,std::allocator<int> > *> const *,std::pair<double,std::vector<int,std::allocator<int> > *>,std::pair<double,std::vector<int,std::allocator<int> > *> const &,std::pair<double,std::vector<int,std::allocator<int> > *> const *,int>' : identifier was truncated to '255' characters in the debug information
+f:\#ai 16-17-2\char 6 ga 17.3.31\6遗传算法求解tsp问题实验x11.5.27\遗传算法(简化版）.cpp(255) : warning C4786: 'std::reverse_iterator<std::pair<double,std::vector<int,std::allocator<int> > *> *,std::pair<double,std::vector<int,std::allocator<int> > *>,std::pair<double,std::vector<int,std::allocator<int> > *> &,std::pair<double,std::vector<int,std::allocator<int> > *> *,int>' : identifier was truncated to '255' characters in the debug information
+c:\program files\microsoft visual studio\vc98\include\vector(39) : warning C4786: 'std::vector<std::pair<double,std::vector<int,std::allocator<int> > *>,std::allocator<std::pair<double,std::vector<int,std::allocator<int> > *> > >::vector<std::pair<double,std::vector<int,std::allocator<int> > *>,std::allocator<std::pair<double,std::vector<int,std::allocator<int> > *> > >' : identifier was truncated to '255' characters in the debug information
+c:\program files\microsoft visual studio\vc98\include\vector(60) : warning C4786: 'std::vector<std::pair<double,std::vector<int,std::allocator<int> > *>,std::allocator<std::pair<double,std::vector<int,std::allocator<int> > *> > >::~vector<std::pair<double,std::vector<int,std::allocator<int> > *>,std::allocator<std::pair<double,std::vector<int,std::allocator<int> > *> > >' : identifier was truncated to '255' characters in the debug information
+Linking...
+
+
+
+<h3>Results</h3>
+遗传算法(简化版）.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

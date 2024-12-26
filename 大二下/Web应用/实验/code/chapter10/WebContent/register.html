@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Using Ajax for validation</title>
+<script type="text/javascript">
+var xmlHttp;
+function createXMLHttpRequest() {
+    if (window.XMLHttpRequest) {
+         xmlHttp = new XMLHttpRequest();
+     }else{
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+}
+
+
+  function validate() {
+    createXMLHttpRequest();
+    var username = document.getElementById("username");
+    var url = "validation.do?username=" + escape(username.value);
+    xmlHttp.open("GET", url, true);
+    xmlHttp.onreadystatechange = handleStateChange;    
+    xmlHttp.send(null);
+  }
+
+  function handleStateChange() {
+    if(xmlHttp.readyState == 4){
+      if(xmlHttp.status == 200){
+        var message = xmlHttp.responseXML.
+          getElementsByTagName("message")[0].firstChild.data;
+        var messageArea = document.getElementById("results");
+        messageArea.innerHTML = "<p>" + message + "</p>";
+      }
+    }
+  }
+ </script>
+</head>
+
+<body>
+   <p>Ajax数据验证示例</p>   
+   用户名：<input type="text" size="10" id="username"/> 
+   <input type="button" value="检测" onclick="validate();">
+   <div id="results" ></div>
+</body>
+</html>

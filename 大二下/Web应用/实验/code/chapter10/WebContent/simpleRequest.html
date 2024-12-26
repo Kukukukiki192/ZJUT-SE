@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Simple XMLHttpRequest</title>
+<script type="text/javascript">
+var xmlHttp;
+function createXMLHttpRequest() {
+    if (window.XMLHttpRequest) {
+         xmlHttp = new XMLHttpRequest();
+     }else{
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+}
+function startRequest() {
+     createXMLHttpRequest();
+     xmlHttp.onreadystatechange = handleStateChange;
+     xmlHttp.open("GET", "simpleResponse.xml", true);
+     xmlHttp.send(null);
+}
+function handleStateChange() {
+    if(xmlHttp.readyState == 4) {
+        if(xmlHttp.status == 200) {
+            alert("服务器返回： " + xmlHttp.responseText);
+        }
+    }
+}
+</script>
+</head>
+<body>
+<form action="#">
+    <input type="button" value="开始异步请求" 
+onclick="startRequest();"/>
+</form>
+</body>
+</html>
+

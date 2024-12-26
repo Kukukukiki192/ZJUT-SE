@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+     xmlns:context="http://www.springframework.org/schema/context"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+     <!--定义数据源Bean，使用C3P0数据源实现-->
+     <bean id="dataSource" 
+     class="com.mchange.v2.c3p0.ComboPooledDataSource" 
+                destroy-method="close">
+       <property name="driverClass" value="com.mysql.jdbc.Driver" />
+       <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/webstore?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+       <property name="user" value="root" />
+       <property name="password" value="123456" />
+       <property name="maxPoolSize" value="40" />
+       <property name="minPoolSize" value="1" />
+       <property name="initialPoolSize" value="1" />
+       <property name="maxIdleTime" value="20" />
+    </bean>
+    <!--定义Hibernate的SessionFactory-->
+    <bean id="sessionFactory"   
+          class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+      <property name="dataSource" ref="dataSource"/>
+       <property name="mappingResources">
+           <list>
+               <value>com/entity/Member.hbm.xml</value>
+           </list>
+      </property>
+      <!--设置Hibernate的属性-->
+     <property name="hibernateProperties">
+       <props>
+          <prop key="hibernate.show_sql">true</prop>
+          <prop key="hibernate.hbm2ddl.auto">update</prop>
+        	 <prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+          <prop key="hibernate.current_session_context_class">
+                 org.springframework.orm.hibernate5.SpringSessionContext</prop>
+          <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+      </props>
+     </property>
+    </bean>
+    
+   <bean id="memberDao" class="com.dao.MemberDAOImpl" >
+       <!--构造方法注入会话工厂组件sessionFactory-->  
+     <constructor-arg><ref bean="sessionFactory"></ref></constructor-arg>
+  </bean>
+  <bean id="memberService" class="com.service.MemberServiceImpl" >
+    <!--设值注入DAO组件-->
+    <property name="memberDao" ref="memberDao" />
+  </bean>
+  
+  <bean id="memberRegisterAction" class="com.action.MemberRegisterAction">
+    <!--设值注入业务逻辑组件--> 
+    <property name="memberService" ref="memberService"></property>
+  </bean>
+  
+  <bean id="memberLoginAction" class="com.action.MemberLoginAction">
+    <!--设值注入业务逻辑组件-->
+    <property name="memberService" ref="memberService"></property>
+  </bean>
+  
+  <bean id="memberQueryAction" class="com.action.MemberQueryAction">
+    <property name="memberService" ref="memberService"></property>
+  </bean>
+  
+  <bean id="memberDeleteAction" class="com.action.MemberDeleteAction">
+    <property name="memberService" ref="memberService"></property>
+  </bean>
+  
+  <bean id="memberUpdateAction" class="com.action.MemberUpdateAction">
+     <!--设值注入业务逻辑组件-->
+    <property name="memberService" ref="memberService"></property>
+  </bean>
+    
+</beans>

@@ -1,0 +1,74 @@
+/*定义视图
+CREATE  VIEW <视图名> 
+                        [(<列名>[，<列名>]…)]
+	AS <SELECT子查询语句>
+	[WITH  CHECK  OPTION];
+*/
+1.行列子集视图
+CREATE  VIEW  CS_View  
+AS
+SELECT  zkx_Sno,zkx_Tno,zkx_Cno,zkx_Score
+FROM  Zhukx_Reports
+WHERE  zkx_Score>=60
+WITH CHECK OPTION
+
+2.基于多个基本表的视图
+CREATE  VIEW SCT_View 
+AS
+SELECT  zkx_Sname,zkx_Cname,zkx_Tname
+FROM Zhukx_Students, Zhukx_Courses, Zhukx_Teachers, Zhukx_Reports
+WHERE Zhukx_Students.zkx_Sno= Zhukx_Reports.zkx_Sno 
+AND Zhukx_Reports.zkx_Cno=Zhukx_Courses.zkx_Cno
+AND Zhukx_Reports.zkx_Tno=Zhukx_Teachers.zkx_Tno
+WITH CHECK OPTION
+
+3.带表达式的视图
+//某个目标列不是单纯的属性名，而是集函数或列表达式，需明确指定组成视图的所有列名
+CREATE  VIEW EXP_View(zkx_Sname,zkx_Cname,zkx_Sscore)
+AS
+SELECT  zkx_Sname,zkx_Cname,zkx_Score+5'new zkx_Score'
+FROM Zhukx_Students, Zhukx_Courses,Zhukx_Reports
+WHERE Zhukx_Students.zkx_Sno= Zhukx_Reports.zkx_Sno 
+AND Zhukx_Reports.zkx_Cno=Zhukx_Courses.zkx_Cno
+WITH CHECK OPTION
+
+4.分组视图
+CREATE  VIEW Group_View
+AS
+SELECT  Zhukx_Students.zkx_Sno,AVG(zkx_Score)AVERAGE
+FROM Zhukx_Students,Zhukx_Reports
+GROUP BY Zhukx_Students.zkx_Sno
+
+5.基于视图的视图
+CREATE  VIEW VV_View
+AS
+SELECT  zkx_Sno,COUNT(zkx_Cno)CCOUNT,AVG(zkx_Score)AVERAGE
+FROM CS_View
+GROUP BY zkx_Sno
+
+//查询视图
+6.
+SELECT  zkx_Sname
+FROM SCT_View
+WHERE zkx_Cname='数据库原理及应用'
+//更新视图
+7.
+INSERT INTO CS_View
+VALUES('S52','T02','C02',59)
+8.
+UPDATE CS_View
+SET zkx_Score=zkx_Score-5
+WHERE zkx_Cno='C01'
+
+UPDATE CS_View
+SET zkx_Score=zkx_Score+5
+WHERE zkx_Cno='C01'
+AND zkx_Score<=95
+
+//删除视图
+9.
+DELETE FROM CS_View
+WHERE zkx_Sno='S03'
+10.
+DROP VIEW SCT_View
+DROP VIEW CS_View

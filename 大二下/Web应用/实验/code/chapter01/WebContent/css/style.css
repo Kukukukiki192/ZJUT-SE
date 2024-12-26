@@ -1,0 +1,62 @@
+@CHARSET "UTF-8";
+body{
+	background-color:white;
+	margin:0px auto;
+}
+h3{
+	font-size:18px;
+	margin:0px;
+	text-align:center;
+}
+ul{text-align:center;
+	list-style-type:none}
+header{
+	background-color:#ff80ff;
+	text-align:center;
+	display:block;
+	color:#FFFFF;
+}
+nav{
+	display:block;
+	width:100%;
+	float:left;
+	text-align:center;
+	background-color:white;
+	padding-top:0px;
+	padding-bottom:0px;
+}
+.container{
+	width:100%;
+	text-align:center;
+	background-color:#CCC;
+}
+aside{
+	display:block;
+	width:20%;
+	float:left;
+}
+aside a:hover{
+	color:white;
+	background-color:#F47D31;
+}
+section{
+	display:block;
+	background-color:#EEE;
+	width:80%;
+	float:left;
+}
+article{
+   
+   display:block;	
+   margin:10px;	
+   padding:10px;
+}
+article img{float:left}
+footer{
+	clear:both;
+	display:block;
+	background-color:lightgray;
+	text-align:center;
+	padding:15px;
+}
+

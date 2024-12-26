@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<library>
+  <books>
+    <book id="101">
+      <name>Java编程思想(第4版)</name>
+      <author> Bruce Eckel</author>
+      <year>2007.06</year>
+      <price>88.50</price>
+    </book>
+    <book id="102">
+      <name>数据库系统概论</name>
+      <author>王珊</author>
+      <author>萨师瑄</author>
+      <year>2006.5</year>
+      <price>33.80</price>  
+    </book>
+  </books>
+  <magazines>
+<magazine>
+<name>计算机应用研究</name>
+      <year no="1">2004</year>
+      <volume>21</volume>
+      <total>147</total>
+    </magazine>
+  </magazines>
+</library>
+

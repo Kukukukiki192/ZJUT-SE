@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <title>登录页面</title>
+</head>
+<body background="images/BG.JPG" style=" background-repeat:no-repeat ;background-size:100% 100%; background-attachment: fixed;">
+<div class="container">
+    <!--logo-->
+    <header>
+        <div id="logo">
+            <h1>学生信息管理系统</h1>
+        </div>
+    </header>
+</div>
+<div class="container">
+    <form class="form-signin">
+        <h2 class="form-signin-heading" id="login">管理员登录</h2>
+        <label for="inputUsername" class="sr-only">用户名</label>
+        <input type="text" id="inputUsername" class="form-control" placeholder="用户名" required autofocus>
+        <label for="inputPassword" class="sr-only">密码</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="密码" required>
+        <div class="checkbox">
+            <label id="rememberme">
+                <input type="checkbox" value="remember-me">记住我
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <label>没有账号? </label><lable id="register"><a href="">免费注册</a></lable>
+    </form>
+</div>
+</body>
+</html>

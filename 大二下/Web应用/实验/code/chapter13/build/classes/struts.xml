@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	  <!--将Struts 2默认的objectFactory设置为spring-->
+	  <constant name="struts.objectFactory" value="spring" /> 
+	  
+	  <constant name="struts.devMode" value="false" />
+	  <package name="default" namespace="/" extends="struts-default">
+	      <action name="index">
+			  <result>/index.jsp</result>
+		  </action>
+		 <action name="register">
+			  <result>/register.jsp</result>
+		  </action>
+		
+		 <action name="login">
+			  <result>/login.jsp</result>
+		  </action>
+		    
+		<action name="memberRegister" class="memberRegisterAction">
+            <result name="success" type="redirectAction">/memberQuery</result >
+        </action>
+		 
+		<action name="memberLogin" class="memberLoginAction">
+             <result name="success">/welcome.jsp</result >
+             <result name="error">/register.jsp</result >
+        </action>
+		  
+		 <action name="memberQuery" class="memberQueryAction">
+             <result name="success">/displayAll.jsp</result >
+          </action>
+		 
+		 <action name="memberDelete" class="memberDeleteAction">
+          <result name="success" type="redirectAction">/memberQuery</result >
+        </action>
+		  
+		 <action name="memberShow" class="memberUpdateAction" method="showMember">
+            <result name="success">/update.jsp</result>
+        </action>
+        
+         <action name="memberUpdate" class="memberUpdateAction">
+           <result name="success" type="redirectAction">/memberQuery</result>
+         </action>
+		  	  
+	   </package>
+</struts>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<books>
+    <book id="101">
+        <name>Java编程思想(第4版)</name>
+        <author> Bruce Eckel</author>
+        <year>2007.06</year>
+        <price>88.50</price>
+    </book>
+    <book id="102">
+        <name>Java语言程序设计(第3版)</name>
+        <author>沈泽刚</author>
+        <year>2018.04</year>
+        <price>79.50</price>
+    </book>
+</books>

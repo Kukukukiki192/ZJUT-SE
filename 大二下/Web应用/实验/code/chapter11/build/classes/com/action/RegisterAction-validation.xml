@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">     
+<validators>
+	<field name="user.username">
+	<field-validator type="requiredstring">
+		<param name="trim">true</param>
+		<message>用户名不能为空！</message>
+</field-validator>
+	</field>
+	<field name="user.password">
+	<field-validator type="requiredstring" short-circuit="true">
+		<param name="trim">true</param>
+		<message>口令不能为空！</message>
+	</field-validator>
+	<field-validator type="stringlength">
+		<param name="minLength">6</param>
+		<param name="maxLength">14</param>
+		<message>口令包含的字符在6到14个之间！</message>
+	</field-validator>
+	</field>
+<field name="user.age">
+          <field-validator type="int">
+               <param name="min">16</param>
+               <param name="max">60</param>
+            <message>用户年龄应在16到60之间！</message>
+          </field-validator>
+    </field>
+  <field name="user.email">
+<field-validator type="required" short-circuit="true">
+            <message>邮箱地址必填！</message>
+         </field-validator>
+         <field-validator type="email">
+            <message>邮箱地址不合法！</message>
+         </field-validator>
+</field>
+</validators>

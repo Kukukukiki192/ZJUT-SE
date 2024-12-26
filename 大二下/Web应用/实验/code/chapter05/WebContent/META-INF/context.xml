@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context reloadable = "true">
+<Resource
+      name="jdbc/webstoreDS"
+      type="javax.sql.DataSource" 
+      driverClassName="com.mysql.cj.jdbc.Driver"
+      url="jdbc:mysql://127.0.0.1:3306/webstore?useSSL=false&amp;serverTimezone=UTC"
+      username="root"
+      password="123456"
+      maxTotal="4"
+      maxIdle="2"
+      maxWaitMillis="5000"/>
+</Context>

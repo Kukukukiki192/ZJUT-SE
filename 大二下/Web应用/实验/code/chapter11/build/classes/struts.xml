@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<constant name="struts.devMode" value="false" />
+<constant name="struts.enable.DynamicMethodInvocation" value="false" />	 
+<constant name="struts.custom.i18n.resources"  value="ApplicationResources" />
+
+<package name="default" namespace="/" extends="struts-default" >
+    <result-types>
+	    <result-type name="tiles"
+				     class="org.apache.struts2.views.tiles.TilesResult" />
+     </result-types>
+    
+    <action name="index">
+       <result>/index.jsp</result>
+    </action>
+    
+    <action name="hello" class="com.action.HelloUserAction"
+       method="execute">
+      <result name="success">/hellouser.jsp</result>
+    </action>
+    
+    
+     	<action name="Login" class="com.action.LoginAction" 
+                method="authenticate"> 
+	      <result name="success" type="tiles">/welcome.tiles</result>
+		  <result name="error" type="tiles">/error.tiles</result>
+	    </action>
+	    
+	    <action name="logout" class="com.action.LoginAction"
+                method="logout" >
+		          <result name="logout">/login.jsp</result>
+        </action>
+ 
+ </package>
+</struts>
+

@@ -1,0 +1,151 @@
+/*使用ORDER BY字句以及DESC或ASC命令关键字 
+   不写关键字默认升序*/
+1.
+SELECT zkx_Sname
+FROM Zhukx_Students
+WHERE zkx_Ssex='男'
+ORDER BY zkx_Sno
+
+2.
+SELECT zkx_Sno,zkx_Tno,Zhukx_Reports.zkx_Cno,zkx_Score,'Point of zkx_Score',
+CONVERT(FLOAT(1),(zkx_Score-60)*0.1*zhx_Scredit+zhx_Scredit)
+FROM Zhukx_Courses,Zhukx_Reports
+WHERE zkx_Score>=60 AND Zhukx_Reports.zkx_Cno=Zhukx_Courses.zkx_Cno
+UNION 
+SELECT zkx_Sno,zkx_Tno,Zhukx_Reports.zkx_Cno,zkx_Score,'Point of zkx_Score',0
+FROM Zhukx_Courses,Zhukx_Reports
+WHERE Zhukx_Reports.zkx_Cno=Zhukx_Courses.zkx_Cno AND(zkx_Score<60)
+
+3.
+SELECT zkx_Cname
+FROM Zhukx_Courses
+WHERE zhx_ScreditIN('3','4')
+
+/*
+ 由LIKE和NOT LIKE构成谓词条件：
+ [NOT]LIKE’<匹配串>’[ESCAPE’<换码字符>’]
+ 即查找指定的属性列值与<匹配串>相匹配的元组。
+ <匹配串>可以是一个完整的字符串，也可以含有通配符%和_。
+
+ a%b表示以a开头、以b结尾的任意长度的字符串
+
+ a_b 表示以a开头，以b结尾的长度为3的字符串
+*/
+4.
+SELECT zkx_Cno
+FROM Zhukx_Courses
+WHERE zkx_Cname LIKE '%算法%'
+
+5.
+SELECT DISTINCT zkx_Cno//不重复显示
+FROM Zhukx_Reports
+
+6.
+SELECT AVG(zkx_Tsalary)
+FROM Zhukx_Teachers　　
+
+/*使用GROUP BY字句将查询结果表按照某一列或多列的值分组，
+   使其列值相等的为一组*/
+7.
+SELECT  zkx_Tno,AVG(zkx_Score)
+FROM Zhukx_Reports
+GROUP BY zkx_Tno
+ORDER BY AVG(zkx_Score)DESC
+
+8.
+SELECT zkx_Cno,COUNT(zkx_Sno),AVG(zkx_Score)
+FROM Zhukx_Reports
+ORDER BY zkx_Cno
+
+9.***
+SELECT zkx_Sno,zkx_Sname
+FROM Zhukx_Students
+WHERE zkx_Sno IN(
+SELECT zkx_Sno
+FROM Zhukx_Reports
+GROUP BY zkx_Sno
+HAVIN COUNT(*)>=3
+)
+
+10.
+SELECT zkx_Cname,zkx_Score
+FROM Zhukx_Courses, Zhukx_Reports
+WHERE Zhukx_Reports.zhx_Sno='26' AND Zhukx_Courses.zhx_Cno=Zhukx_Reports.zhx_Cno
+
+11.
+SELECT  zkx_Sno,zkx_Sname
+FROM Zhukx_Students
+WHERE zkx_Sno IN(
+SELECT   Zhukx_Reports.zkx_Sno
+FROM Zhukx_Reports,Zhukx_Courses
+WHERE Zhukx_Courses.zkx_Cname='数据库原理及其应用'
+AND Zhukx_Courses.zkx_Cno=Zhukx_Reports.zkx_Cno
+)
+
+12.
+SELECT zkx_Cno,zkx_Cname,zkx_Sno,zkx_Sname,zkx_Semail,zkx_Scredit,zkx_Ssex
+FROM Zhukx_Courses,Zhukx_Students
+WHERE zkx_Sno IN(
+SELECT zkx_Sno
+FROM Zhukx_Reports
+WHERE zkx_Cno IN(
+SELECT zkx_Cno
+FROM Zhukx_Courses))
+ORDER BY zkx_Cno ASC
+
+13.
+SELECT Y.zkx_Sno
+FROM Zhukx_Reports X,FROM Zhukx_Reports Y
+WHERE X.zkx_Cno=Y.zkx_Cno AND X.zkx_Cno='S26'
+//若不包含S26自身，则加上条件X.zkx_Cno<Y.zkx_Cno
+
+14.
+SELECT Zhukx_Reports.zkx_Cno,Zhukx_Reports.zkx_Score,zkx_Sno,zkx_Sname,zkx_Semail,zkx_Scredit,zkx_Ssex
+FROM Zhukx_Students
+JOIN Zhukx_Reports ON Zhukx_Students.zkx_Sno=Zhukx_Reports.zkx_Sno
+
+15.
+SELECT zkx_Sname,zkx_Cname,zkx_Score
+FROM Zhukx_Students,Zhukx_Courses,Zhukx_Reports
+WHERE  Zhukx_Students.zkx_Sno=Zhukx_Reports.zkx_Sno
+AND Zhukx_Courses.zkx_Cno=Zhukx_Reports.zkx_Cno
+AND Zhukx_Students.zkx_Sno='S52'
+
+16.
+SELECT  zkx_Sname,zkx_Cname,zkx_Score
+FROM Zhukx_Students,Zhukx_Courses,Zhukx_Reports
+WHERE Zhukx_Students.zkx_Sno='S52'
+AND Zhukx_Students.zkx_Sno=Zhukx_Reports.zkx_Sno
+AND Zhukx_Courses.zkx_Cno=Zhukx_Reports.zkx_Cno
+
+17.
+SELECT  *
+FROM Zhukx_Students
+WHERE zkx_Ssex IN(
+SELECT zkx_Ssex
+FROM Zhukx_Students
+WHERE zkx_Sno='S52'
+)
+
+19.
+SELECT  zkx_Cno,zkx_Cname
+FROM Zhukx_Courses
+WHERE zkx_Cno NOT IN(
+SELECT zkx_Cno
+FROM Zhukx_Reports
+)
+
+
+24.
+SELECT  zkx_Sname
+FROM Zhukx_Students
+WHERE NOT EXISTS(
+SELECT *
+FROM Zhukx_Reports X
+WHERE NOT EXISTS(
+SELECT *
+FROM Zhukx_Reports Y
+WHERE Y.zkx_Sno=Zhukx_Students.zkx_Sno
+AND Y.zkx_Cno=X.zkx_Cno
+)
+)

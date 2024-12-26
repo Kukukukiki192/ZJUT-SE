@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script languge="JavaScript">
+    function Check(){
+        var a1=document.getElementsByName("a1");
+        var a2=document.getElementsByName("a2");
+        var a3=document.getElementsByName("a3");
+        var reg=new RegExp("[\\u4E00-\\u9FFF]+","g");
+        if(!reg.test(a1.checked)){
+            alert("会员名必须为中文");
+            return false;
+        }
+        if(a1.checked==""||a1.checked=="请输入会员名"){
+            alert("会员名不能为空!");
+            return false;
+        }
+        else if(a2.checked==""||a2.checked=="请输入用户名"){
+            alert("用户名不能为空!");
+            return false;
+        }
+        else if(a3.checked==""||a3.checked=="请输入密码"){
+            alert("密码不能为空!");
+            return false;
+        }
+    }
+    </script>
+</head>
+<body>
+    <form action="welcome.html" method="post" onSubmit="return Check()">
+        <table style="border:1px solid #0000FF;" rules="none" cellspacing="0" width=300 align="center">
+            <tr height=40>
+                <td colspan=2><h2 align=center><font color="blue">企业会员登陆</font></h2></td>
+            </tr>
+            <tr height=40>
+                <td height=40 align=right width=80>会&nbsp;&nbsp;&nbsp;员&nbsp;&nbsp;&nbsp;名</td>
+                <td width=240><input style="width:95%; height:25px;" type="text" value="请输入会员名"
+                onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+                onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
+                style="color:#999" name="a1" id="a1"></td>
+            </tr>
+            <tr height=40>
+            <td height=40 align=right width=80>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名</td>
+            <td width=240><input style="width:95%; height:25px;" type="text" value="请输入用户名"
+                onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+                onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
+                style="color:#999" name="a2" id="a2"></td>
+            </tr>
+            <tr height=40>
+            <td height=40 align=right width=80>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</td>
+            <td width=240><input style="width:95%; height:25px;" type="text" value="请输入密码"
+                 onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+                 onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
+                 style="color:#999" name="a3" id="a3"></td>
+            </tr>
+            <tr>
+                <td height=40 align=left>
+                &nbsp;<input type="checkbox" value="rememberme">记住我
+                </td>
+                <td height=40 align=right>
+                    <a href="" style="text-decoration:none;"><font color="blue">忘记密码？&nbsp;</font></a>
+                </td>
+            </tr>
+            <tr>
+                <td  height=40 colspan=2 align="center">
+                    <input type="image" src="login.png" name="img" />
+                </td>
+            </tr>
+            <tr>
+                <td  height=40 colspan=2 align=right>没有账号？
+                    <a href="" style="text-decoration:none;">
+                        <font color=red>免费注册&nbsp;&nbsp;&nbsp;</font></a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

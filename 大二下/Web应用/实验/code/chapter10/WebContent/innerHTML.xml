@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<table border="1">
+   <tr><td>学号</td><td>姓名</td><td>性别</td><td>年龄</td></tr>
+   <tr><td>20120101</td><td>Li Ming</td><td>男</td><td>19</td></tr>
+   <tr><td>20120102</td><td>Wang Xiaoming</td><td>女</td><td>20</td></tr>
+   <tr><td>20120103</td><td>刘浩</td><td>男</td><td>18</td></tr>
+</table>	

@@ -1,0 +1,111 @@
+/*
+数据库的建立与删除
+1、用SSMS创建数据库Student_16Mis；
+2、在Windows下查看对应的两个存储文件：
+       Student_16Mis_Data.MDF
+       Student_16Mis_Log.LDF
+*/
+1.
+USE master
+GO
+CREATE DATABASE Zhukx_University_Mis
+ON
+( NAME= Zhukx_University_Mis_Data,
+  FILENAME='D:\数据库\Zhukx_University_Mis_data.mdf',
+  SIZE=10,
+  MAXSIZE=50,
+  FILEGROWTH=5
+ )	
+ LOG ON
+ ( NAME=Zhukx_University_Mis_Log,
+   FILENAME='D:\数据库\Zhukx_University_Mis_log.ldf',
+  SIZE=5MB,
+  MAXSIZE=25MB,
+  FILEGROWTH=5MB
+ )
+ GO
+
+/*
+定义基本表
+CREATE TABLE <表名>
+  (<列名> <数据类型> [列级完整性约束条件] 
+   [, <列名> <数据类型> [列级完整性约束条件]]…
+   [, <表级完整性约束条件])；
+*/
+2. 4个表
+①
+CREATE TABLE  Zhukx_Students(
+	zkx_Sno CHAR(8) PRIMARY KEY, //主键
+	zkx_Sname CHAR(20) NOT NULL, 
+	zkx_Semail CHAR(50),
+	zkx_Scredit Float,
+	zkx_Sroom CHAR(20),
+	CONSTRAINT CK_Scredit CHECK(zkx_Scredit>=0) //CK_Scredit-完整性约束名
+	)
+②
+CREATE TABLE Zhukx_Teachers(
+	zkx_Tno CHAR(8) PRIMARY KEY,
+	zkx_Tname CHAR(20),
+	zkx_Temail CHAR(50),
+	zkx_Tsalary INT
+	)
+③
+CREATE TABLE Zhukx_Courses( 
+	zkx_Cno CHAR(8) PRIMARY KEY,
+	zkx_Cname CHAR(20),
+	zkx_Ccredit Float
+    )
+④
+CREATE TABLE Zhukx_Reports(
+	zkx_Sno CHAR(8) CONSTRAINT FK_Sno FOREIGN KEY(zkx_Sno) REFERENCES Zhukx_Students(zkx_Sno),
+	zkx_Tno CHAR(8) CONSTRAINT FK_Tno FOREIGN KEY(zkx_Tno) REFERENCES Zhukx_Teachers(zkx_Tno),
+    	zkx_Cno CHAR(8) CONSTRAINT FK_Cno FOREIGN KEY(zkx_Cno) REFERENCES Zhukx_Courses(zkx_Cno),
+	zkx_Score INT,
+	CONSTRAINT PK_Reports PRIMARY KEY(zkx_Sno,zkx_Tno,zkx_Cno)
+    )
+
+/*
+修改基本表
+ALTER TABLE <表名>
+[ADD  <新列名> <数据类型> [完整性约束]]  添加
+[ DROP CONSTRAINT [完整性约束名]]	 删除
+[ALTER COLUMN <列名> <数据类型>]	 修改
+*/
+3.
+ALTER TABLE Zhukx_Students ADD zkx_Ssex CHAR(2)
+ALTER TABLE Zhukx_Students DROP CONSTRAINT CK_Scredit
+ALTER TABLE Zhukx_Courses ALTER COLUMN zkx_Cname CHAR(30)
+4.
+ALTER TABLE Zhukx_Students DROP COLUMN zkx_Sroom
+
+/*
+删除基本表
+DROP TABLE <表名> 
+*/
+5.
+DROP TABLE Zhukx_Reports
+
+/*
+建立索引
+CREATE [UNIQUE] [CLUSTERED] INDEX<索引名> 
+   ON <表名> (<列名> [<排序方式>]
+                    [，<列名>[<排序方式>]]…)；
+
+用<排序方式>来指定索引值按ASC(升序)或DESC(降序) 方式排序，缺省值为ASC
+[UNIQUE]-非聚焦的唯一索引
+[CLUSTERED]-聚集索引
+不加这2项-普通索引
+*/
+6.
+CREATE INDEX Cour_Cno ON Zhukx_Courses (zkx_Cno DESC)
+7.
+CREATE INDEX Stu_Sno ON Zhukx_Students (zkx_Sno ASC)
+8.
+CREATE UNIQUE INDEX Stu_Sname ON Zhukx_Students (zkx_Sname ASC)
+
+/*
+删除索引
+DROP  INDEX <表名.索引名>；
+*/
+9.
+DROP INDEX Zhukx_Students.Stu_Sno

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>用户注册</title>
+<script  type="text/javascript" src="js/checks.js">
+
+</script>
+<style type="text/css">
+     *,input {font-size:11pt;color:black}
+</style>
+</head>
+<body>
+<form action="/chapter01/inputCustomer" 
+      method="post" onSubmit="return check();">
+请输入客户信息：
+<table>
+<tr><td>客户名:</td>
+          <td><input type="text" name="custName" id="custName"></td>
+</tr>
+<tr><td>邮箱地址:</td>
+          <td><input type="text" name="email" id="email"></td>
+</tr>
+<tr><td>电话:</td>
+    <td><input type="text" name="phone" id="phone"></td>
+</tr>
+</table>
+<input type="submit" value="确定">
+<input type="reset" value="重置">
+</form>
+</body>
+</html>

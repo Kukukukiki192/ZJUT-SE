@@ -1,0 +1,43 @@
+与SQL server2014 安装教程对应（用于学习与研究，限时下载，不可用于商业目的）
+
+以下为百度网盘里分享的下载地址（里面软件自选，百度随时可能会封杀掉，抓紧下载）
+1、链接：https://pan.baidu.com/s/18WWJ5KDOqoej1PhAcHtwSA 
+提取码：joot 复制这段内容后打开百度网盘手机App，操作更方便哦
+
+2、链接：https://pan.baidu.com/s/1h18xwYaw6RZXywhN6FiAAg 
+提取码：e1o1 
+复制这段内容后打开百度网盘手机App，操作更方便哦
+3、链接：https://pan.baidu.com/s/1PHUpcAxkuWARNTRBstzD-Q 
+提取码：zsq3
+4、链接：https://pan.baidu.com/s/1XcXvfy_6UoP3ihb_pKQsBw 
+提取码：zf4t 
+复制这段内容后打开百度网盘手机App，操作更方便哦
+一、SQL 2014 安装的软件环境
+1、自制U盘启动盘（可选）
+准备一个大点容量的U盘，以备以后把所有想用的软件工具放进来包括操作系统等，百度网盘里面的UShenDu_UEFI_bd制作u盘启动盘
+2、win10操作系统（可选）
+（1）百度网盘里面的win10自行下载【64位简体中文专业/家庭版】
+文件名：cn_windows_10_multi-edition_version_1709_updated_sept_2017_x64_dvd_100090804.iso
+SHA1：9306895149F9328CDB77FF28368F83EE984BDC30
+文件大小：4.42GB
+下载地址：（可用迅雷下载）
+ed2k://|file|cn_windows_10_multi-edition_version_1709_updated_sept_2017_x64_dvd_100090804.iso|4740610048|37051C54894776826823DAEBDD03F1DC|/
+（2）可选择百度网盘里面的联想开始经典菜单sm8-setup-lenovo-08171，既有经典菜单和win7一样便于查找安装的软件，又有win10菜单。
+3、安装选择百度网盘里面的framework3.5.exe，不是framework4.0.exe
+4、安装选择百度网盘里面的
+mu_visual_studio_2010_sp1_x86_x64_dvd_651704.iso
+若你使用微软的开发工具，需安装百度网盘里面的
+cn_visual_studio_2010_ultimate旗舰版_x86_dvd_532347.iso
+也可自行用迅雷下载）：
+ed2k://|file|cn_visual_studio_2010_ultimate_x86_dvd_532347.iso|2685982720|4AE6228933DDE49D9BFA4C3467C831C2|/
+顺便也提供大家一个百度网盘里面的Microsoft Office 2016 官方简体中文正式版 ISO镜像（VOL）
+SW_DVD5_Office_Professional_Plus_2016_64Bit_ChnSimp_MLF_X20-42426.ISO
+也可自行用迅雷下载）：
+ed2k://|file|SW_DVD5_Office_Professional_Plus_2016_64Bit_ChnSimp_MLF_X20-42426.ISO|1123452928|31087A00FF67D4F5B4CBF4AA07C3433B|/
+二、SQL 2014 安装准备工作及说明：
+第一，准备好安装包并且安装包的文件名不要带中文；
+第二，本教程的适应环境是64位简体中文专业/家庭版；
+第三，安装包是百度网盘里面的SQL 2014 企业版安装包，如下图！（里面有多个安装包，看完说明自行选择）
+ 
+第四，本教程仅限个人学习与研究使用，不得用于商业用途，违者必究！
+尤其注意安装前要关闭防火墙、杀毒软件等，否则安装不成功哟，安装过程中除防火墙以外，必需全部通过才安装成功，否则白费力气，重来！！！！！！！！

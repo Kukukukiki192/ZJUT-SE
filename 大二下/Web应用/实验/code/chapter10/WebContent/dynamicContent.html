@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dynamically Editing Page Content</title>
+<script type="text/javascript">
+var xmlHttp;
+var requestType = "";
+
+function createXMLHttpRequest() {
+    if (window.XMLHttpRequest) {
+         xmlHttp = new XMLHttpRequest();
+     }else{
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+}
+
+    
+function startSearch(requestedList) {
+    requestType = requestedList;
+    createXMLHttpRequest();
+    xmlHttp.onreadystatechange = handleStateChange;
+    xmlHttp.open("GET", "library.xml", true);
+    xmlHttp.send(null);
+}
+    
+function handleStateChange() {
+    if(xmlHttp.readyState == 4) {
+        if(xmlHttp.status == 200) {
+           clearResults();
+           parseResults();
+        }
+    }
+}
+
+function clearResults(){
+  var header = document.getElementById("header");
+  if(header.hasChildNodes()){
+     header.removeChild(header.childNodes[0]);
+  }
+  var tableBody = document.getElementById("resultsBody");
+  while(tableBody.childNodes.length > 0){
+    tableBody.removeChild(tableBody.childNodes[0]);
+  }
+}
+
+function parseResults(){
+    var results = xmlHttp.responseXML;
+    var items = null;
+    var item = null;
+   
+    var books = null;
+    var magazines = null;
+    
+    if(requestType == "books"){
+      books = results.getElementsByTagName("books");
+      items = books[0].getElementsByTagName("book");
+      for(var i = 0; i < items.length; i++){
+          item = items[i];
+          name = item.getElementsByTagName("name")[0].firstChild.nodeValue;
+          author = item.getElementsByTagName("author")[0].firstChild.nodeValue;
+          year = item.getElementsByTagName("year")[0].firstChild.nodeValue;
+          price = item.getElementsByTagName("price")[0].firstChild.nodeValue;
+          addTableRow(name,author,year,price);
+       }
+    } else if(requestType == "magazines"){
+      magazines = results.getElementsByTagName("magazines");
+      items = magazines[0].getElementsByTagName("magazine");
+      for(var i = 0; i < items.length; i++){
+          item = items[i];
+          name = item.getElementsByTagName("name")[0].firstChild.nodeValue;
+          year = item.getElementsByTagName("year")[0].firstChild.nodeValue;
+          volume = item.getElementsByTagName("volume")[0].firstChild.nodeValue;
+          total = item.getElementsByTagName("total")[0].firstChild.nodeValue;
+          addTableRow(name,year,volume,total);
+       }
+    }
+    
+    var header = document.createElement("p");
+    var headerText = document.createTextNode("查询结果如下:");
+    header.appendChild(headerText);
+    document.getElementById("header").appendChild(header);
+    document.getElementById("resultsTable").setAttribute("border","1");
+}
+
+function addTableRow(p1,p2,p3,p4){
+  var row = document.createElement("tr");
+  var cell = createCellWithText(p1);
+  row.appendChild(cell);
+  
+  cell = createCellWithText(p2);
+  row.appendChild(cell);
+  
+  cell = createCellWithText(p3);
+  row.appendChild(cell);
+  
+  cell = createCellWithText(p4);
+  row.appendChild(cell);
+  
+  document.getElementById("resultsBody").appendChild(row);
+}
+
+function createCellWithText(text){
+  var cell = document.createElement("td");
+  var textNode = document.createTextNode(text);
+  cell.appendChild(textNode);
+  return cell;
+}	
+</script>
+</head>
+<body>
+   <p>查看图书或杂志</p> 
+   <form action="#">
+        <input type="button" value="查看图书"  
+           onclick="startSearch('books');"/>
+        <input type="button" value="查看杂志"  
+           onclick="startSearch('magazines');"/>
+   </form>
+   <span id="header"></span>
+   <table id="resultsTable" border="0">
+   	 <tbody id="resultsBody">
+     </tbody>
+   </table>
+</body>
+</html>

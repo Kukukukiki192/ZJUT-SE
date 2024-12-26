@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>百斯特电子商城</title>
+  <link href="css\style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<header>
+  <img alt="Here is a logo." src="images/head.jpg" />
+</header>
+<div class="container">
+<nav>
+      <form action="LoginServlet" method="post" name="login" > 
+      <p>用户名<input type="text" name="username" size="13" /> 
+         密  码 <input type="password" name="password" size="13"  />
+        <input type="submit" name="Submit" value="登  录">
+        <input type="button" name="register" value="注  册"
+        onclick="check();"> 
+     <input type="button" name="myorder" value="我的订单" />
+        <input type="button" name="shopcart" value="查看购物车" />
+      </form>  
+</nav>
+<aside>
+<h3>商品分类</h3>
+       <ul class="inside">
+           <li><a href="goods.do?catalog=mobilephone">手机数码</a></li>
+           <li><a href="goods.do?catalog=electrical">家用电器</a></li>
+           <li><a href="goods.do?catalog=automobile">汽车用品</a></li>
+           <li><a href="goods.do?catalog=clothes">服饰鞋帽</a></li>
+           <li><a href="goods.do?catalog=health">运动健康</a></li>
+        </ul>
+</aside>
+
+<section>
+ <article>
+ <img src="images/phone.jpg">
+三星 S5830领取手机节优惠券，立减100元！再送：200元移动手机卡！
+  派派价：2068元
+ </article>
+ 
+</section>
+<section>
+<article>
+ <img src="images/comp.jpg">
+ 联想（Lenovo）G460AL-ITH 14.0英寸笔记本电脑（i3-370M 2G 500G 512
+独显 DVD刻录 摄像头 Win7)特价：3199元！
+ </article>
+</section>
+</div>
+<footer>
+  <hr size="1" color="blue"/>  
+  <p> 版权所有 &copy; 2018 百斯特电子商城有限责任公司,8899123.</p>
+</footer>
+</body>
+</html>
+

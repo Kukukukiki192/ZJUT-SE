@@ -1,0 +1,63 @@
+/*插入数据
+INSERT  INTO <表名>[(<属性列1>[，<属性列2>…])
+    SELECT子查询语句/VALUES(' ',' ',   ,...)
+*/
+1.
+INSERT INTO Zhukx_Students(zkx_Sno,zkx_Sname,zkx_Semail,zkx_Scredit,zkx_Ssex)
+values('S78','李迪','LD@zjut.edu.cn',0,'男')
+2.
+①对象表不存在
+SELECT zkx_Cno,zkx_Count=COUNT(zkx_Sno),zkx_Avg=AVG(zkx_Score) 
+INTO Zhukx_Statistics
+FROM Zhukx_Reports
+GROUP BY zkx_Cno
+②对象表存在
+ CREATE TABLE Zhukx_Statistics(
+ zkx_Cno CHAR(8) PRIMARY KEY,
+ zkx_Count INT,
+ zkx_Avg INT
+ )
+INSERT　INTO Zhukx_Statistics（zkx_Cno，zkx_Count，zkx_Avg）
+SELECT zkx_Cno,zkx_Count=COUNT(zkx_Sno),zkx_Avg=AVG(zkx_Score) 
+FROM Zhukx_Reports
+GROUP BY zkx_Cno
+
+/*修改数据
+UPDATE <表名>
+SET <列名1>=<表达式1>
+         [,<列名2>=<表达式2>…]
+[WHERE <条件>]
+*/
+3.
+UPDATE Zhukx_Students
+SET zkx_Sno='S70'
+WHERE zkx_Sname='李迪'
+4.
+UPDATE Zhukx_Teachers
+SET zkx_Tsalary=zkx_Tsalary+500
+5.
+UPDATE Zhukx_Reports
+SET zkx_Score=zkx_Score+6
+WHERE EXISTS(
+SELECT * FROM Zhukx_Students,Zhukx_Courses
+WHERE  Zhukx_Students.zkx_Sno=Zhukx_Reports.zkx_Sno
+AND Zhukx_Students.zkx_Sname='刘华'
+AND Zhukx_Courses.zkx_Cno=Zhukx_Reports.zkx_Cno
+AND Zhukx_Courses.zkx_Cname='数据库原理及其应用'
+)
+
+/*删除数据
+DELETE  FROM <表名>  [WHERE<条件>]
+*/
+6.
+DELETE  FROM Zhukx_Students
+WHERE zkx_Sname='李迪'
+7.
+DELETE  FROM Zhukx_Reports
+WHERE zkx_Cno=(
+SELECT zkx_Cno
+FROM Zhukx_Courses
+WHERE zkx_Cname='JAVA')
+8.
+DELETE FROM Zhukx_Courses //DELETE [dbo].[Zhukx_Courses]
+WHERE zkx_Ccredit<=4

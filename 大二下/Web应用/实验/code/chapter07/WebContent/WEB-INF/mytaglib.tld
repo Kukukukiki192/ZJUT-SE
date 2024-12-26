@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee  http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+    version="2.0">
+ <tlib-version>1.0</tlib-version>
+ <short-name>TagExample</short-name> 
+<uri>http://www.mydomain.com/sample</uri>
+<tag>
+    <name>hello</name>
+    <tag-class>com.mytag.HelloTag</tag-class>
+    <body-content>empty</body-content>
+</tag>
+
+<tag>
+<name>star</name>
+<tag-class>com.mytag.RedStarTag</tag-class>
+<body-content>empty</body-content>
+</tag>
+
+<tag>
+<name>welcome</name>
+<tag-class>com.mytag.WelcomeTag</tag-class>
+<body-content>scriptless</body-content>
+<attribute>
+<name>user</name>
+<required>false</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>	
+
+<tag>
+    <name>dobody</name>
+    <tag-class>com.mytag.BodyTagDemo</tag-class>
+    <body-content>scriptless</body-content>
+</tag>
+<tag>
+<name>marker</name>
+<tag-class>com.mytag.MarkerTag</tag-class>
+<body-content>scriptless</body-content>
+<attribute>
+        <name>search</name>
+        <required>true</required>
+</attribute>
+</tag>
+<tag>
+<name>loop</name>
+<tag-class>com.mytag.LoopTag</tag-class>
+<body-content>scriptless</body-content>
+<attribute>
+<name>count</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+</tag>
+<tag>
+    <name>showProduct</name>
+    <tag-class>com.mytag.ProductTag</tag-class>
+    <body-content>scriptless</body-content>
+    <attribute>
+         <name>productList</name>
+         <required>true</required>
+         <rtexprvalue>true</rtexprvalue>
+    </attribute>
+</tag>
+<tag>
+<name>mathtag</name>
+<tag-class>com.mytag.MathTag</tag-class>
+<body-content>empty</body-content>
+<attribute>
+<name>num</name>
+<required>true</required>
+<rtexprvalue>true</rtexprvalue>
+</attribute>
+<dynamic-attributes>true</dynamic-attributes>
+</tag>
+
+</taglib>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Triangle</title>
+</head>
+<body>
+<form action="computeTriangleArea.do" method="post" onSubmit="return Check()">
+    输入三角形的3个边长：<br>
+    边长a<input type="text" size=10 name="a" id="a" value="请输入边长a"
+              onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+              onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
+              style="color:#999"><br>
+    边长b<input type="text" size=10 name="b" id="b" value="请输入边长b"
+              onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+              onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
+              style="color:#999"><br>
+    边长c<input type="text" size=10 name="c" id="c" value="请输入边长c"
+              onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+              onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
+              style="color:#999"><br>
+    <input type="submit" name="submit" value="提交">
+</form>
+</body>
+</html>

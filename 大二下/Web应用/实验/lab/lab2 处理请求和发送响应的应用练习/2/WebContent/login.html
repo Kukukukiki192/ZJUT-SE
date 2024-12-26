@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <style>
+   		.sub{
+			width: 286px;
+			height: 40px;
+			background-color: cornflowerblue;
+			color:white;
+			font-size: 15px;
+			text-align: -moz-center;
+		}
+	</style>
+    <script language="JavaScript" type="text/javascript">
+    function Check(){
+    	var userName=document.getElementById("userName");
+  	  	var password=document.getElementById("password");
+  		if(userName.value ==""||userName.value=="请输入用户名"){
+		  	alert("用户名不能为空！");
+		  	return false;
+	  	}
+	  	else if(password.value == ""||password.value=="请输入密码"){
+		  	alert("密码不能为空！");
+		  	return false;
+	  	}
+	}
+    </script>
+</head>
+<body>
+    <form action="check.do" method="post" Onsubmit="return Check()">
+        <table style="border:1px solid #0000FF;" rules="none" cellspacing="0" width=300 align="center">
+            <tr height=40>
+                <td colspan=2><h2 align=center><font color="blue">企业会员登陆</font></h2></td>
+            </tr>
+            <tr height=40>
+            	<td height=40 align=right width=80>用&nbsp;&nbsp;&nbsp;户&nbsp;&nbsp;&nbsp;名</td>
+            	<td width=240><input style="width:95%; height:25px;" type="text" value="请输入用户名"
+               		onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+                	onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
+                	style="color:#999" name="userName" id="userName"></td>
+      		</tr>
+      		<tr height=40>
+           		<td height=40 align=right width=80>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</td>
+ 				<td width=240><input style="width:95%; height:25px;" type="text" value="请输入密码"
+                 	onFocus="if(value==defaultValue){value='';this.style.color='#000'}"
+                 	onBlur="if(!value){value=defaultValue;this.style.color='#999'}"
+                 	style="color:#999" name="password" id="password"></td>
+      		</tr>
+            <tr>
+         		<td height=80 colspan=2 align=center>
+         			<button type="submit" id="submit" class="sub"  >立即登录</button></td> 
+      		</tr>
+            <tr>
+                <td height=40 colspan=2 align=right>没有账号？
+                    <a href="" style="text-decoration:none;"><font color=red>免费注册&nbsp;&nbsp;&nbsp;</font></a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,74 @@
+实验6的SQL语句
+1.
+SELECT zkx_Score,zkx_Score/20
+FROM Zhukx_Reports
+2.
+SELECT COUNT(*)
+FROM Zhukx_Reports
+WHERE zkx_Cno='C07'
+(AND zkx_Score>=60)
+(AND zkx_Score<60)
+结论：NULL不会出现在结果的统计中
+3.
+成绩从小到大排序：
+SELECT zkx_Score
+FROM Zhukx_Reports
+ORDER BY zkx_Score ASC(降序：DESC)
+结论：NULL在排列时被当做最小值处理
+4.
+SELECT DISTINCT zkx_Score
+FROM Zhukx_Reports
+ORDER BY zkx_Score ASC
+结论：所有取NULL值的项被看成同一项
+5.
+SELECT zkx_Score
+FROM Zhukx_Reports
+ORDER BY zkx_Score
+结论：取NULL的值被当做一个分组
+6.
+SELECT zkx_Sno,AVG(zkx_Score),COUNT(*),COUNT(zkx_Score),MAX(zkx_Score),MIN(zkx_Score),SUM(zkx_Score)
+FROM Zhukx_Reports
+GROUP BY zkx_Sno
+结论：COUNT(*)计算元组时会把取空值的项计算进去，其它集合函数都忽略了取空值的项
+7.
+SELECT COUNT(*),COUNT(zkx_Score),MAX(zkx_Score),MIN(zkx_Score)
+FROM Zhukx_Reports
+WHERE zkx_Score<0
+结论：结果是空集
+8.
+SELECT DISTINCT zkx_Ccredit
+FROM Zhukx_Courses X
+WHERE zkx_Ccredit<=ALL(
+SELECT zkx_Ccredit
+FROM Zhukx_Courses Y
+WHERE X.zkx_Cno<>Y.zkx_Cno
+)
+结论：只有一个记录时，唯一的元组将被选出
+9.
+CREATE TABLE S(
+No CHAR(8) NOT NULL UNIQUE,
+Sno CHAR(8),
+Sname CHAR(20),
+CONSTRAINT PK_S PRIMARY KEY(No)
+)
+CREATE TABLE T(
+No CHAR(8) NOT NULL UNIQUE,
+Tno CHAR(8),
+Tname CHAR(20),
+CONSTRAINT PK_T PRIMARY KEY(No)
+)
+10.
+INSERT INTO S VALUES('n1','S01','李迪')
+INSERT INTO S VALUES('n2','S02','李岚')
+INSERT INTO S VALUES('n3','S03',NULL)
+INSERT INTO S VALUES('n4','S04','关红')
+11.
+INSERT INTO T VALUES('n1','T09','李迪')
+INSERT INTO T VALUES('n2','T08','李兰')
+INSERT INTO T VALUES('n3','T01',NULL)
+INSERT INTO T VALUES('n4','T02',NULL)
+12.
+SELECT Tno,Sno,Sname
+FROM T,S
+WHERE T.Tname=S.Sname
+结论：等值连接2个列时，该列的NULL值项都被忽略

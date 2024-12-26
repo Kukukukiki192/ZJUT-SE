@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping package="com.hibernate">
+	<class name="Card" table="card" lazy="true">
+	<id name="id" column="id">
+		<generator class="foreign">
+		  <param name="property">student</param>
+		</generator>
+	</id>
+	<property name="cardNo" type="string" column="cardNo" />
+	<property name="major" type="string" column="major" />
+	<property name="balance" type="double" column="balance" />
+	<one-to-one name="student" class="com.hibernate.Student"
+	            constrained="true" />
+	</class>
+</hibernate-mapping>
+
+

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My World</title>
+    <style>
+        body{
+            /*边界看宽度默认为8,在这里初始值设为零*/
+            margin: 0;
+            font-family: 楷体;
+        }
+        nav{
+            width: 100%;
+            height: 64px;
+            /*定位方式: 固定位置*/
+            position: fixed;
+            top: 0;
+            background-color: white;
+            z-index: 1000;
+        }
+
+        /*找到nav标签下 div标签后代选择器 ，可以找到nav下的所有的div标签*/
+        nav div{
+            width: 1000px;
+            height: 64px;
+            /*块元素居中*/
+            margin:0 auto;
+        }
+        #logo{
+            width: 216px;
+            /*相对定位,位置微调*/
+            position: relative;
+            top: 7px;
+            left: 15px;
+        }
+        ul{
+            float: right;
+            margin: 0;
+            /*左内边距设为零*/
+            padding-left: 0;
+        }
+        li{
+            float: left;
+            /*设置列表项的前缀为none*/
+            list-style: none;
+            margin-right: 35px;
+        }
+        li a{
+            line-height: 70px;
+            /*去除超链接下划线*/
+            text-decoration: none;
+            color: black;
+            font-size:23px;
+        }
+        li a:hover{
+            color: brown;
+        }
+        #header{
+            /*图片宽度设为100%*/
+            width: 100%;
+        }
+        main {
+            width: 1000px;
+            margin:0 auto;
+        }
+        /*只找到父子关系的标签找到section下img标签，不会找到孙级标签*/
+        section > img {
+
+        }
+        p {
+            color: #000000;
+            /*文本首行缩进2个字符*/
+            text-indent: 2em;
+            font-size:24px;
+        }
+        ps{
+            color: #000000;
+            font-size:24px;
+        }
+        h2 {
+            color: brown;
+        }
+        #me{
+            /*图片宽度设为100%*/
+            width: 100%;
+        }
+        #hometown{
+            /*图片宽度设为100%*/
+            width: 100%;
+        }
+        #memory{
+            /*图片宽度设为100%*/
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<!--navigation 导航 标记网页中的导航条 块元素-->
+<nav>
+    <div>
+        <img id="logo" src="myworld.png" alt="myworld">
+        <!--ul无序列表 li 列表元素-->
+        <ul>
+            <!--实现点击首页标签跳转到指定界面-->
+            <!--a标签  超链接标签-->
+            <li><a href="#header">Home</a></li>
+            <li><a href="#me">About me</a></li>
+            <li><a href="#hometown">Hometown</a></li>
+            <li><a href="#memory">Memory</a></li>
+        </ul>
+    </div>
+</nav>
+<img id="header" src="Home.png" alt="animal">
+<!--main 元素 标记网页中的主要部分内容-->
+<main>
+    <!--p标签，用来标记网页中的段落内容！-->
+    <p></p>
+    <ps>
+        <table>
+            <tr height="40">
+                <td width="500px">朱可心</td>
+                <td>女</td>
+            </tr>
+            <tr height="40">
+                <td>2000.8.18</td>
+                <td>我喜欢打篮球、听歌、看书</td>
+            </tr>
+            <tr height="40">
+                <td>就读于浙江工业大学</td>
+                <td>云南昆明人士</td>
+        </table>
+        <p></p>
+    </ps>
+    <!--section 组件、模块, 块元素-->
+    <section id="me">
+        <h2>About me</h2>
+        <img src="me.png" alt="me">
+        <p>一起奋斗的日子是我们最潇洒的时光</p>
+    </section>
+
+    <section id="hometown">
+        <h2>Hometown</h2>
+        <img src="Hometown.png" alt="hometown">
+        <p>春城昆明的夜景</p>
+    </section>
+
+    <section id="memory">
+        <h2>Memory</h2>
+        <img src="Memory1.png" alt="memory1">
+        <img src="Memory2.png" alt="memory2">
+    </section>
+</main>
+<hr>
+</body>
+</html>

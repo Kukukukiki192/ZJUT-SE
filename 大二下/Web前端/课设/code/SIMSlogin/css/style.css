@@ -1,0 +1,10 @@
+
+.form-signin { margin:0 auto;    width: 300px; }
+
+#logo { top: 25px; left: 90px; color: #ffffff; }
+#login { color: #ffffff; }
+#rememberme { color: #ffffff; }
+/*#noID { text-align: left; }*/
+#register { text-align: right; }
+
+.redstar { color: #FF0000;}

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>学生信息管理系统 | 信息浏览</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta name="author" content="ZKX">
+	
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="http://fonts.useso.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<link href="assets/plugins/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+	<link href="assets/css/animate.min.css" rel="stylesheet" />
+	<link href="assets/css/style.min.css" rel="stylesheet" />
+	<link href="assets/css/style-responsive.min.css" rel="stylesheet" />
+	<link href="assets/css/theme/default.css" rel="stylesheet" id="theme" />
+	<!-- ================== END BASE CSS STYLE ================== -->
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="assets/plugins/pace/pace.min.js"></script>
+	<!-- ================== END BASE JS ================== -->
+</head>
+<body>
+	<!-- begin #page-container -->
+	<div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
+		<!-- begin #header -->
+		<div id="header" class="header navbar navbar-default navbar-fixed-top">
+			<!-- begin container-fluid -->
+			<div class="container-fluid">
+				<!-- begin mobile sidebar expand / collapse button -->
+				<div class="navbar-header">
+					<a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> 学生信息管理系统</a>
+				</div>
+				<!-- end mobile sidebar expand / collapse button -->
+
+				<!-- begin header navigation right -->
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<form class="navbar-form full-width">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="输入关键字" />
+								<button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
+							</div>
+						</form>
+					</li>
+					<li class="dropdown navbar-user">
+						<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+							<img src="assets/img/me.png" alt="" />
+							<span class="hidden-xs">ZKX</span> <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu animated fadeInLeft">
+							<li class="arrow"></li>
+							<li><a href="javascript:;">编辑个人资料</a></li>
+							<li><a href="javascript:;">设置</a></li>
+							<li class="divider"></li>
+							<li><a href="login.html">退出</a></li>
+						</ul>
+					</li>
+				</ul>
+				<!-- end header navigation right -->
+			</div>
+			<!-- end container-fluid -->
+		</div>
+		<!-- end #header -->
+
+		<!-- begin #sidebar -->
+		<div id="sidebar" class="sidebar">
+			<!-- begin sidebar scrollbar -->
+			<div data-scrollbar="true" data-height="100%">
+				<!-- begin sidebar user -->
+				<ul class="nav">
+					<li class="nav-profile">
+						<div class="info">系统操作</div>
+					</li>
+				</ul>
+				<!-- end sidebar user -->
+				<!-- begin sidebar nav -->
+				<ul class="nav">
+					<li class="has-sub">
+						<a href="form_validation.html">
+							<i class="fa fa-file-o"></i>
+							<span>信息输入</span>
+						</a>
+					</li>
+					<li class="has-sub">
+						<a href="table_basic.html">
+							<i class="fa fa-th"></i>
+							<span>信息浏览 </span>
+						</a>
+					</li>
+				</ul>
+				<!-- end sidebar nav -->
+			</div>
+			<!-- end sidebar scrollbar -->
+		</div>
+		<div class="sidebar-bg"></div>
+		<!-- end #sidebar -->
+		
+		<!-- begin #content -->
+		<div id="content" class="content">
+			<!-- begin breadcrumb -->
+			<ol class="breadcrumb pull-right">
+				<li><a href="index.html">首页</a></li>
+				<li class="active">信息浏览</li>
+			</ol>
+			<!-- end breadcrumb -->
+			<!-- begin page-header -->
+			<h1 class="page-header">信息浏览 <small>所有学生信息概览...</small></h1>
+			<!-- end page-header -->
+
+			<div class="row">
+			    <!-- begin col-12 -->
+			    <div class="col-md-12">
+			        <!-- begin panel -->
+                    <div class="panel panel-inverse" data-sortable-id="table-basic-7">
+                        <div class="panel-heading">
+                            <div class="panel-heading-btn">
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                            </div>
+                            <h4 class="panel-title">学生基本信息</h4>
+                        </div>
+                        <div class="panel-body">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>序号</th>
+											<th>姓名</th>
+											<th>性别</th>
+											<th>学号</th>
+											<th>学院</th>
+											<th>专业</th>
+											<th>班级</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>周诚新</td>
+											<td>男</td>
+											<td>201806061730</td>
+											<td>计算机学院</td>
+											<td>计算机科学与技术</td>
+											<td>1805</td>
+											<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal1">详情</button>
+												<!-- Modal -->
+												<div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title" id="myModalLabel1">学生详细信息</h4>
+															</div>
+															<div class="modal-body">
+																<table class="table">
+																		<tr><td>注册时间 </td><td>2020-06-03</td></tr>
+																		<tr><td>研究方向 </td><td>移动应用开发</td></tr>
+																		<tr><td>担任职位 </td><td>无</td></tr>
+																		<tr><td>联系电话 </td><td>15216526771</td></tr>
+																		<tr><td>邮箱 </td><td>1821922731@qq.com</td></tr>
+																		<tr><td>住址 </td><td>浙江省杭州市西湖区西溪雅苑</td></tr>
+																		<tr><td>生日 </td><td>1999-12-22</td></tr>
+																		<tr><td>选修课程 </td><td>复变函数与积分变换</td></tr>
+																		<tr><td></td><td>人工智能导论</td></tr>
+																		<tr><td>兴趣爱好 </td><td>篮球</td></tr>
+																</table>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>徐泽</td>
+											<td>男</td>
+											<td>201806061521</td>
+											<td>计算机学院</td>
+											<td>软件工程</td>
+											<td>1803</td>
+											<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal2">详情</button>
+												<!-- Modal -->
+												<div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title" id="myModalLabel2">学生详细信息</h4>
+															</div>
+															<div class="modal-body">
+																<table class="table">
+																	<tr><td>注册时间 </td><td>2020-05-07</td></tr>
+																	<tr><td>研究方向 </td><td>大数据</td></tr>
+																	<tr><td>担任职位 </td><td>班长</td></tr>
+																	<tr><td>联系电话 </td><td>15215443211</td></tr>
+																	<tr><td>邮箱 </td><td>1626555671@qq.com</td></tr>
+																	<tr><td>住址 </td><td>云南省昆明市盘龙区金江小区</td></tr>
+																	<tr><td>生日 </td><td>1999-12-13</td></tr>
+																	<tr><td>选修课程 </td><td>计算方法及实现</td></tr>
+																	<tr><td></td><td>人工智能导论</td></tr>
+																	<tr><td></td><td>Web前端开发</td></tr>
+																	<tr><td>兴趣爱好 </td><td>街舞、唱歌</td></tr>
+																</table>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>徐露</td>
+											<td>女</td>
+											<td>201806061211</td>
+											<td>计算机学院</td>
+											<td>数字媒体技术</td>
+											<td>1802</td>
+											<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal3">详情</button>
+												<!-- Modal -->
+												<div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title" id="myModalLabel3">学生详细信息</h4>
+															</div>
+															<div class="modal-body">
+																<table class="table">
+																	<tr><td>注册时间 </td><td>2020-06-03</td></tr>
+																	<tr><td>研究方向 </td><td>移动应用开发</td></tr>
+																	<tr><td>担任职位 </td><td>无</td></tr>
+																	<tr><td>联系电话 </td><td>15216526771</td></tr>
+																	<tr><td>邮箱 </td><td>1821922731@qq.com</td></tr>
+																	<tr><td>住址 </td><td>浙江省杭州市西湖区西溪雅苑</td></tr>
+																	<tr><td>生日 </td><td>1999-12-22</td></tr>
+																	<tr><td>选修课程 </td><td>复变函数与积分变换</td></tr>
+																	<tr><td></td><td>人工智能导论</td></tr>
+																	<tr><td>兴趣爱好 </td><td>篮球</td></tr>
+																</table>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>4</td>
+											<td>章嘉怡</td>
+											<td>女</td>
+											<td>201806061101</td>
+											<td>计算机学院</td>
+											<td>软件工程</td>
+											<td>1804</td>
+											<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal4">详情</button>
+												<!-- Modal -->
+												<div class="modal fade" id="Modal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title" id="myModalLabel4">学生详细信息</h4>
+															</div>
+															<div class="modal-body">
+																<table class="table">
+																	<tr><td>注册时间 </td><td>2020-06-03</td></tr>
+																	<tr><td>研究方向 </td><td>移动应用开发</td></tr>
+																	<tr><td>担任职位 </td><td>无</td></tr>
+																	<tr><td>联系电话 </td><td>15216526771</td></tr>
+																	<tr><td>邮箱 </td><td>1821922731@qq.com</td></tr>
+																	<tr><td>住址 </td><td>浙江省杭州市西湖区西溪雅苑</td></tr>
+																	<tr><td>生日 </td><td>1999-12-22</td></tr>
+																	<tr><td>选修课程 </td><td>复变函数与积分变换</td></tr>
+																	<tr><td></td><td>人工智能导论</td></tr>
+																	<tr><td>兴趣爱好 </td><td>篮球</td></tr>
+																</table>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>5</td>
+											<td>胡静</td>
+											<td>男</td>
+											<td>201806060722</td>
+											<td>计算机学院</td>
+											<td>物联网工程</td>
+											<td>1802</td>
+											<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal5">详情</button>
+												<!-- Modal -->
+												<div class="modal fade" id="Modal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel5">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title" id="myModalLabel5">学生详细信息</h4>
+															</div>
+															<div class="modal-body">
+																<table class="table">
+																	<tr><td>注册时间 </td><td>2020-06-03</td></tr>
+																	<tr><td>研究方向 </td><td>移动应用开发</td></tr>
+																	<tr><td>担任职位 </td><td>无</td></tr>
+																	<tr><td>联系电话 </td><td>15216526771</td></tr>
+																	<tr><td>邮箱 </td><td>1821922731@qq.com</td></tr>
+																	<tr><td>住址 </td><td>浙江省杭州市西湖区西溪雅苑</td></tr>
+																	<tr><td>生日 </td><td>1999-12-22</td></tr>
+																	<tr><td>选修课程 </td><td>复变函数与积分变换</td></tr>
+																	<tr><td></td><td>人工智能导论</td></tr>
+																	<tr><td>兴趣爱好 </td><td>篮球</td></tr>
+																</table>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>6</td>
+											<td>张启天</td>
+											<td>男</td>
+											<td>201806061413</td>
+											<td>计算机学院</td>
+											<td>网络工程</td>
+											<td>1801</td>
+											<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal6">详情</button>
+												<!-- Modal -->
+												<div class="modal fade" id="Modal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel6">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title" id="myModalLabel6">学生详细信息</h4>
+															</div>
+															<div class="modal-body">
+																<table class="table">
+																	<tr><td>注册时间 </td><td>2020-06-03</td></tr>
+																	<tr><td>研究方向 </td><td>移动应用开发</td></tr>
+																	<tr><td>担任职位 </td><td>无</td></tr>
+																	<tr><td>联系电话 </td><td>15216526771</td></tr>
+																	<tr><td>邮箱 </td><td>1821922731@qq.com</td></tr>
+																	<tr><td>住址 </td><td>浙江省杭州市西湖区西溪雅苑</td></tr>
+																	<tr><td>生日 </td><td>1999-12-22</td></tr>
+																	<tr><td>选修课程 </td><td>复变函数与积分变换</td></tr>
+																	<tr><td></td><td>人工智能导论</td></tr>
+																	<tr><td>兴趣爱好 </td><td>篮球</td></tr>
+																</table>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>7</td>
+											<td>李佳</td>
+											<td>女</td>
+											<td>201806061909</td>
+											<td>计算机学院</td>
+											<td>电子科学与技术</td>
+											<td>1801</td>
+											<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal7">详情</button>
+												<!-- Modal -->
+												<div class="modal fade" id="Modal7" tabindex="-1" role="dialog" aria-labelledby="myModalLabel7">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title" id="myModalLabel7">学生详细信息</h4>
+															</div>
+															<div class="modal-body">
+																<table class="table">
+																	<tr><td>注册时间 </td><td>2020-06-03</td></tr>
+																	<tr><td>研究方向 </td><td>移动应用开发</td></tr>
+																	<tr><td>担任职位 </td><td>无</td></tr>
+																	<tr><td>联系电话 </td><td>15216526771</td></tr>
+																	<tr><td>邮箱 </td><td>1821922731@qq.com</td></tr>
+																	<tr><td>住址 </td><td>浙江省杭州市西湖区西溪雅苑</td></tr>
+																	<tr><td>生日 </td><td>1999-12-22</td></tr>
+																	<tr><td>选修课程 </td><td>复变函数与积分变换</td></tr>
+																	<tr><td></td><td>人工智能导论</td></tr>
+																	<tr><td>兴趣爱好 </td><td>篮球</td></tr>
+																</table>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>8</td>
+											<td>边映</td>
+											<td>女</td>
+											<td>201806060826</td>
+											<td>计算机学院</td>
+											<td>通信工程</td>
+											<td>1801</td>
+											<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal8">详情</button>
+												<!-- Modal -->
+												<div class="modal fade" id="Modal8" tabindex="-1" role="dialog" aria-labelledby="myModalLabel8">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title" id="myModalLabel8">学生详细信息</h4>
+															</div>
+															<div class="modal-body">
+																<table class="table">
+																	<tr><td>注册时间 </td><td>2020-06-03</td></tr>
+																	<tr><td>研究方向 </td><td>移动应用开发</td></tr>
+																	<tr><td>担任职位 </td><td>无</td></tr>
+																	<tr><td>联系电话 </td><td>15216526771</td></tr>
+																	<tr><td>邮箱 </td><td>1821922731@qq.com</td></tr>
+																	<tr><td>住址 </td><td>浙江省杭州市西湖区西溪雅苑</td></tr>
+																	<tr><td>生日 </td><td>1999-12-22</td></tr>
+																	<tr><td>选修课程 </td><td>复变函数与积分变换</td></tr>
+																	<tr><td></td><td>人工智能导论</td></tr>
+																	<tr><td>兴趣爱好 </td><td>篮球</td></tr>
+																</table>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>9</td>
+											<td>王珂杰</td>
+											<td>男</td>
+											<td>201806061115</td>
+											<td>计算机学院</td>
+											<td>电子信息工程</td>
+											<td>1801</td>
+											<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal9">详情</button>
+												<!-- Modal -->
+												<div class="modal fade" id="Modal9" tabindex="-1" role="dialog" aria-labelledby="myModalLabel9">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title" id="myModalLabel9">学生详细信息</h4>
+															</div>
+															<div class="modal-body">
+																<table class="table">
+																	<tr><td>注册时间 </td><td>2020-06-03</td></tr>
+																	<tr><td>研究方向 </td><td>移动应用开发</td></tr>
+																	<tr><td>担任职位 </td><td>无</td></tr>
+																	<tr><td>联系电话 </td><td>15216526771</td></tr>
+																	<tr><td>邮箱 </td><td>1821922731@qq.com</td></tr>
+																	<tr><td>住址 </td><td>浙江省杭州市西湖区西溪雅苑</td></tr>
+																	<tr><td>生日 </td><td>1999-12-22</td></tr>
+																	<tr><td>选修课程 </td><td>复变函数与积分变换</td></tr>
+																	<tr><td></td><td>人工智能导论</td></tr>
+																	<tr><td>兴趣爱好 </td><td>篮球</td></tr>
+																</table>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>10</td>
+											<td>张潇</td>
+											<td>女</td>
+											<td>201806061008</td>
+											<td>计算机学院</td>
+											<td>数据科学与大数据技术</td>
+											<td>1802</td>
+											<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#Modal10">详情</button>
+												<!-- Modal -->
+												<div class="modal fade" id="Modal10" tabindex="-1" role="dialog" aria-labelledby="myModalLabel10">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+																<h4 class="modal-title" id="myModalLabel10">学生详细信息</h4>
+															</div>
+															<div class="modal-body">
+																<table class="table">
+																	<tr><td>注册时间 </td><td>2020-06-03</td></tr>
+																	<tr><td>研究方向 </td><td>移动应用开发</td></tr>
+																	<tr><td>担任职位 </td><td>无</td></tr>
+																	<tr><td>联系电话 </td><td>15216526771</td></tr>
+																	<tr><td>邮箱 </td><td>1821922731@qq.com</td></tr>
+																	<tr><td>住址 </td><td>浙江省杭州市西湖区西溪雅苑</td></tr>
+																	<tr><td>生日 </td><td>1999-12-22</td></tr>
+																	<tr><td>选修课程 </td><td>复变函数与积分变换</td></tr>
+																	<tr><td></td><td>人工智能导论</td></tr>
+																	<tr><td>兴趣爱好 </td><td>篮球</td></tr>
+																</table>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<ul class="pagination">
+							<li class="previous"><a href="#">&laquo;</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li class="next"><a href="#">&raquo;</a></li>
+						</ul>
+					</div>
+                    <!-- end panel -->
+			    </div>
+			    <!-- end col-12 -->
+			</div>
+			<!-- end row -->
+			<!--版权标志-->
+			<section id="copyright" class="container">
+				Copyright ZKX   © 浙江工业大学计算机学院
+			</section>
+		</div>
+		<!-- end #content -->
+
+	</div>
+	<!-- end page container -->
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="assets/plugins/jquery/jquery-1.9.1.min.js"></script>
+	<script src="assets/plugins/jquery/jquery-migrate-1.1.0.min.js"></script>
+	<script src="assets/plugins/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+	<script src="assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="assets/plugins/jquery-cookie/jquery.cookie.js"></script>
+	<!-- ================== END BASE JS ================== -->
+	
+	<!-- ================== BEGIN PAGE LEVEL JS ================== -->
+	<script src="assets/js/apps.min.js"></script>
+	<!-- ================== END PAGE LEVEL JS ================== -->
+	
+	<script>
+		$(document).ready(function() {
+			App.init();
+		});
+	</script>
+	 
+</body>
+</html>

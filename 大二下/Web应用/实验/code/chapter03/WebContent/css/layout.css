@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+body,div,p,ul{
+	margin:0;
+	padding:0;
+}
+#container {
+   width:1004px;
+   margin:0 auto;   
+}
+#header { 
+    margin-bottom:5px;
+}
+#topmenu { 
+    margin-bottom:5px;
+}
+.clearfix:after{clear: both;content: ".";display: block;height: 0;visibility: hidden;}
+.clearfix{display: block; *zoom:1;}
+#mainContent {
+	margin:0 0 5px 0;
+}
+#leftmenu { 
+    float:left; width:200px;
+    padding:5px 0 5px 30px;
+}
+#leftmenu ul{
+	list-style:none;
+}
+#leftmenu p{
+	margin:0 0 10px 0;
+}
+#content { 
+	float:left; width:650px;
+}
+#footer { 
+    height:60px;
+}
+
+

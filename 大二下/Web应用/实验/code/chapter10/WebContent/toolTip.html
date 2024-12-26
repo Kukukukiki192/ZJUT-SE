@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax Tool Tip</title>
+<script type="text/javascript">
+    var dataDiv;
+    var dataTable;
+    var dataTableBody;
+    var offsetEl;
+    var xmlHttp;
+    function createXMLHttpRequest() {
+        if (window.XMLHttpRequest) {
+             xmlHttp = new XMLHttpRequest();
+         }else{
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+    }
+
+ 
+function initVars() {
+    dataTableBody = document.getElementById("dogDataBody");
+    dataTable = document.getElementById("dogData");
+    dataDiv = document.getElementById("popup");
+}
+
+function getDogData(element) {
+    initVars();
+    createXMLHttpRequest();
+    offsetEl = element;
+    var url = "toolTip.do?key=" + escape(element.id);
+ 
+    xmlHttp.open("GET", url, true);
+    xmlHttp.onreadystatechange = handleStateChange;
+    xmlHttp.send(null);
+}
+ 
+function handleStateChange () {
+   if (xmlHttp.readyState == 4) {
+        if (xmlHttp.status == 200) {
+             setData(xmlHttp.responseXML);
+        }
+   }
+}
+ 
+function setData(dogData) {
+     clearData();
+     setOffsets();
+     var desc = 
+dogData.getElementsByTagName("description")[0].firstChild.data;
+     var row = createRow(desc);
+     dataTableBody.appendChild(row);
+}
+ 
+function createRow(data) {
+    var row, cell, txtNode;
+    row = document.createElement("tr");
+    cell = document.createElement("td");
+    cell.setAttribute("bgcolor", "#FFFAFA");
+    cell.setAttribute("border", "0");
+
+    txtNode = document.createTextNode(data);
+    cell.appendChild(txtNode);
+    row.appendChild(cell);
+    return row;
+ }
+ 
+function setOffsets() {
+    var top = offsetEl.offsetHeight;
+    var left = calculateOffsetLeft(offsetEl);
+    dataDiv.style.border = "blue 1px solid";
+    dataDiv.style.left = left + 20 + "px";
+    dataDiv.style.top = top  + 50 + "px";
+}
+ 
+function calculateOffsetLeft(field) {
+    var offset = 0;
+    while(field) {
+       offset += field["offsetLeft"];
+       field = field.offsetParent;
+}
+    return offset;
+    }
+ 
+function clearData() {
+    var ind = dataTableBody.childNodes.length;
+    for (var i = ind - 1; i >= 0 ; i--) {
+       dataTableBody.removeChild(dataTableBody.childNodes[i]);
+     }
+    dataDiv.style.border = "none";
+}
+</script>
+</head>
+<body>
+    <h4>Ajax工具提示示例</h4>
+    <table id="dogs" bgcolor="#FFFAFA" border="1"
+                        cellspacing="0" cellpadding="2">
+        <tbody>
+            <tr><td id="dog1" onmouseover="getDogData(this);"
+                          onmouseout="clearData();">
+<img src="images/dog0.jpg" width="128" height="96" /></td>
+            <td id="dog2" onmouseover="getDogData(this);"
+                          onmouseout="clearData();">
+<img src="images/dog1.jpg" width="128" height="96" /></td>
+            <td id="dog3" onmouseover="getDogData(this);"
+                          onmouseout="clearData();">
+<img src="images/dog2.jpg" width="128" height="96" /></td></tr>
+        </tbody>
+    </table>
+    <div style="position:absolute;" id="popup">
+        <table id="dogData" bgcolor="#FFFAFA" border="0"
+                            cellspacing="2" cellpadding="2"/>
+            <tbody id="dogDataBody"></tbody>
+        </table>
+    </div>
+  </body>
+</html>

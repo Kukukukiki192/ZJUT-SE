@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>杭州健康码</title>
+    <script languge="JavaScript">
+    function Check(){
+        var a1=document.getElementsByName("a1");
+        var a2=document.getElementsByName("a2");
+        var a3=document.getElementsByName("a3");
+        var a4=document.getElementsByName("a4");
+        if(!a1[0].checked&&!a1[1].checked
+        ||!a2[0].checked&&!a2[1].checked
+        ||!a3[0].checked&&!a3[1].checked&&!a3[2].checked&&!a3[3].checked&&!a3[4].checked&&!a3[5].checked&&!a3[6].checked
+<!--        2者必选，否则无法提交-->
+        ||!a4[0].checked||!a4[1].checked){
+            alert("请填写完整!");
+            return false;
+        }
+        alert('提交成功!')
+    }
+    </script>
+</head>
+<body>
+    <form action="succeed.htlm" method="post" onSubmit="return Check()">
+       <table border=0 width=300 align=center style="border:1px solid #F5F5F5;" cellspacing="0">
+<!--           标题图片-->
+           <tr bgcolor=#F5F5F5>
+               <td bordercolor=#F5F5F5><img alt="图片" src="1.png"></td>
+           </tr>
+           <tr height=0.5 bgcolor=#F5F5F5>
+               <td>&nbsp;</td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><font color=red>*</font>
+                   <font size=3>您最近14天是否离开过杭州或当前所在城市?[单选]</font>
+               </td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><input name="a1" type="radio" value="0" />否</td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><input name="a1" type="radio" value="0" />是</td>
+           </tr>
+           <tr height=0.5 bgcolor=#F5F5F5>
+               <td style="border:1px solid #F5F5F5;">&nbsp;</td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><font color=red>*</font>
+                   <font size=3>您最近14天是否接触过新冠确诊病人或疑似病人?[单选]</font>
+               </td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><input name="a2" type="radio" value="0" />否</td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><input name="a2" type="radio" value="0" />是</td>
+           </tr>
+           <tr height=0.5 bgcolor=#F5F5F5>
+               <td style="border:1px solid #F5F5F5;">&nbsp;</td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><font color=red>*</font>
+                   <font size=3>当前健康状况(若有以下状况,请在方框内勾选)[多选]</font>
+               </td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><input name="a3" type="checkbox" value="0" />无异常</td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><input name="a3" type="checkbox" value="0" />乏力</td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><input name="a3" type="checkbox" value="0" />干咳</td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><input name="a3" type="checkbox" value="0" />鼻塞</td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><input name="a3" type="checkbox" value="0" />流涕</td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><input name="a3" type="checkbox" value="0" />咽痛</td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><input name="a3" type="checkbox" value="0" />腹泻</td>
+           </tr>
+           <tr height=0.5 bgcolor=#F5F5F5>
+               <td style="border:1px solid #F5F5F5;">&nbsp;</td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><font size=3>本人郑重承诺(两项必选):</font></td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><input name="a4" type="checkbox" value="0" />
+                   为疫情防控，本人同意以上信息依法提交所在辖区疫情防控部门统筹管理。
+               </td>
+           </tr>
+           <tr height=40>
+               <td style="border:1px solid #F5F5F5;"><input name="a4" type="checkbox" value="0" />
+                   上述信息是我本人填写，本人对信息内容的真实性和完整性负责。若信息有损或缺失，
+                   本人愿承担相应的法律责任。同时，本人保证遵守防疫管控的各项规定，配合并听从各项措施和要求。
+               </td>
+           </tr>
+           <tr height=0.5 bgcolor=#F5F5F5>
+               <td style="border:1px solid #F5F5F5;">&nbsp;</td>
+           </tr>
+<!--           提交图片-->
+           <tr height=35 bgcolor=#F5F5F5>
+               <td height=40 align=center style="border:1px solid #F5F5F5;">
+               <input type="image" src="2.png" name="img" /></td>
+           </tr>
+       </table>
+    </form>
+</body>
+</html>

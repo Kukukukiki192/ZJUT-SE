@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Parseing XML Response with DOM</title>
+<script type="text/javascript">
+var xmlHttp;
+var requestType = "";
+function createXMLHttpRequest() {
+    if (window.XMLHttpRequest) {
+         xmlHttp = new XMLHttpRequest();
+     }else{
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+}
+
+    
+function startRequest(requestedList) {
+    requestType = requestedList;
+    createXMLHttpRequest();
+    xmlHttp.onreadystatechange = handleStateChange;
+    xmlHttp.open("GET", "library.xml", true);
+    xmlHttp.send(null);
+}
+    
+function handleStateChange() {
+    if(xmlHttp.readyState == 4) {
+        if(xmlHttp.status == 200) {
+           if(requestType == "books"){
+             listBooks();
+           }
+           else if(requestType == "magazines"){
+             listMagazines();
+           }
+        }
+    }
+}
+
+function listBooks(){
+  var xmlDoc = xmlHttp.responseXML;
+  var bookNode = xmlDoc.getElementsByTagName("books")[0];
+  var allBook = bookNode.getElementsByTagName("book");
+  outputList("All Books",allBook);
+}
+
+function listMagazines(){
+  var xmlDoc = xmlHttp.responseXML;
+  var magazineNode = xmlDoc.getElementsByTagName("magazines")[0];
+  var allMagazine = magazineNode.getElementsByTagName("magazine");
+  outputList("All Magazines",allMagazine);
+}
+
+function outputList(title, items){
+  var out = title;
+  var currentItem = null;
+  for(var i = 0; i< items.length; i++){
+    currentItem = items[i];
+    out = out + "\n-"+currentItem.childNodes[0].firstChild.nodeValue;
+  }
+  alert(out);
+}
+</script>
+</head>
+<body>
+   <h4>XML 文档解析</h4> 
+   <form action="#">
+        <input type="button" value="查看图书"  
+onclick="startRequest('books');"/>
+        <input type="button" value="查看杂志"  
+onclick="startRequest('magazines');"/>
+   </form>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>学生查询</title>
+<script type="text/javascript">
+var xmlHttp;
+function createXMLHttpRequest() {
+    if (window.XMLHttpRequest) {
+         xmlHttp = new XMLHttpRequest();
+     }else{
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+}
+
+    
+function startRequest() {
+    createXMLHttpRequest();
+    xmlHttp.onreadystatechange = handleStateChange;
+    xmlHttp.open("GET", "innerHTML.xml", true);
+    xmlHttp.send(null);
+}
+    
+function handleStateChange() {
+    if(xmlHttp.readyState == 4) {
+        if(xmlHttp.status == 200) {
+           document.getElementById("results").innerHTML=
+xmlHttp.responseText;
+        }
+    }
+}
+</script>
+
+</head>
+<body>
+<form action="#">
+    <input type="button" value="查询学生" 
+           onclick="startRequest();"/>
+</form>
+<div id="results"></div>
+</body>
+</html>

@@ -1,0 +1,268 @@
+
+/*
+一、数据库建立
+1. 用SSMS创建数据库Student_16Mis；
+2. 在Windows下查看对应的两个存储文件：
+       Student_16Mis_Data.MDF
+       Student_16Mis_Log.LDF
+*/
+USE master
+GO
+CREATE DATABASE zhukexinMTS10
+ON
+( NAME= zhukexinMTS10_Data,
+  FILENAME='D:\数据库\zhukexinMTS10_data.mdf',
+  SIZE=10,
+  MAXSIZE=50,
+  FILEGROWTH=5
+ )	
+ LOG ON
+ ( NAME=zhukexinMTS10_Log,
+   FILENAME='D:\数据库\zhukexinMTS10_log.ldf',
+  SIZE=5MB,
+  MAXSIZE=25MB,
+  FILEGROWTH=5MB
+ )
+ GO
+
+/*
+二、基本表建立
+1. 教师表zhukx_教师10
+*/
+CREATE TABLE  zhukx_教师10(
+zkx_教师编号10 CHAR(5) PRIMARY KEY, 
+zkx_教师姓名10 CHAR(10),
+zkx_教师性别10 CHAR(5),
+zkx_教师年龄10 INT,
+zkx_职称10       CHAR(10),
+zkx_联系电话10 CHAR(20)
+)
+/* 2. 课程表zhukx_课程10 */
+CREATE TABLE  zhukx_课程10(
+zkx_课程编号10 CHAR(5) PRIMARY KEY, 
+zkx_课程名称10 CHAR(10),
+zkx_教师姓名10 CHAR(10),
+zkx_开课时间10 CHAR(20),
+zkx_课程学时10 INT check(zkx_课程学时10>0),
+zkx_考核方式10 CHAR(5),
+zkx_学分10        INT  check(zkx_学分10>0)
+)
+
+/* 3. 专业表zhukx_专业10 */
+CREATE TABLE  zhukx_专业10(
+zkx_专业编号10 CHAR(5) PRIMARY KEY,
+zkx_专业名称10 CHAR(10)
+)
+
+/* 4. 班级表zhukx_班级10 */
+CREATE TABLE  zhukx_班级10(
+zkx_班级编号10 CHAR(5) PRIMARY KEY,
+zkx_班级名称10 CHAR(10),
+zkx_专业编号10 CHAR(5)
+constraint 专业 foreign key(zkx_专业编号10) references zhukx_专业10
+)
+
+/* 5. 学生表zhukx_学生10 */
+CREATE TABLE  zhukx_学生10(
+zkx_学号10 CHAR(5) PRIMARY KEY,
+zkx_姓名10 CHAR(10),
+zkx_性别10 CHAR(5),
+zkx_年龄10 INT,
+zkx_生源地10 CHAR(20),
+zkx_已修学分总数10 INT,
+zkx_班级编号10 CHAR(5)
+constraint 班级 foreign key(zkx_班级编号10) references zhukx_班级10
+)
+
+/* 6. 上课表zhukx_上课10 */
+CREATE TABLE  zhukx_上课10(
+zkx_教师编号10 CHAR(5),
+zkx_班级编号10 CHAR(5),
+PRIMARY KEY(zkx_教师编号10,zkx_班级编号10),
+constraint 班级1 foreign key(zkx_班级编号10) references zhukx_班级10,
+constraint 教师1 foreign key(zkx_教师编号10) references zhukx_教师10
+)
+
+/* 7. 授课表zhukx_授课10 */
+CREATE TABLE  zhukx_授课10(
+zkx_教师编号10 CHAR(5),
+zkx_课程编号10 CHAR(5),
+PRIMARY KEY(zkx_教师编号10,zkx_课程编号10),
+constraint 课程1 foreign key(zkx_课程编号10) references zhukx_课程10,
+constraint 教师2 foreign key(zkx_教师编号10) references zhukx_教师10
+)
+
+/* 8. 学习表zhukx_学习10 */
+CREATE TABLE  zhukx_学习10(
+zkx_学号10 CHAR(5),
+zkx_课程编号10 CHAR(5),
+PRIMARY KEY(zkx_学号10,zkx_课程编号10),
+zkx_学期10 CHAR(10),
+zkx_成绩10 INT,
+zkx_教师姓名10 CHAR(10),
+constraint 课程3 foreign key(zkx_课程编号10) references zhukx_课程10,
+constraint 学生3 foreign key(zkx_学号10) references zhukx_学生10
+)
+
+/* 9. 开设表zhukx_开设10 */
+CREATE TABLE  zhukx_开设10(
+zkx_课程编号10 CHAR(5),
+zkx_班级编号10 CHAR(5),
+PRIMARY KEY(zkx_课程编号10,zkx_班级编号10),
+constraint 班级4 foreign key(zkx_班级编号10) references zhukx_班级10,
+constraint 课程4 foreign key(zkx_课程编号10) references zhukx_课程10
+)
+
+/* 10. 登录表zhukx_登录10 */
+CREATE TABLE  zhukx_登录10(
+zkx_用户名10 CHAR(20) PRIMARY KEY,
+zkx_密码10 CHAR(20),
+zkx_权限10 CHAR(10)
+)
+
+/* 二、视图建立
+1. 学生成绩统计
+*/
+create view 学生成绩统计 as(
+select zhukx_学生10.zkx_学号10,zhukx_学生10.zkx_姓名10,zhukx_课程10.zkx_课程名称10,
+zkx_班级名称10,zhukx_学习10.zkx_教师姓名10,zkx_学分10,zkx_开课时间10,zkx_成绩10
+from zhukx_学生10,zhukx_课程10,zhukx_班级10,zhukx_学习10
+where zhukx_学生10.zkx_学号10=zhukx_学习10.zkx_学号10
+AND zhukx_学习10.zkx_课程编号10=zhukx_课程10.zkx_课程编号10
+AND zhukx_班级10.zkx_班级编号10=zhukx_学生10.zkx_班级编号10
+)
+
+/* 2. 每门课程平均成绩统计 */
+create view 每门课程平均成绩 as(
+select zkx_课程编号10,avg(zkx_成绩10) 平均成绩
+from zhukx_学习10
+group by zkx_课程编号10
+)
+
+/* 3. 学生所学课程及学分统计 */
+create view 学生所学课程及学分统计 as(
+select zkx_学号10,zkx_课程名称10,zkx_学分10
+from 学生成绩统计
+)
+
+/* 4. 教师任课查询 */
+create view 教师任课查询 as(
+select zkx_教师编号10,zhukx_教师10.zkx_教师姓名10,zkx_课程编号10,
+ zkx_课程名称10,zkx_课程学时10,zkx_学分10
+from zhukx_教师10,zhukx_课程10
+where zhukx_教师10.zkx_教师姓名10=zhukx_课程10.zkx_教师姓名10
+)
+
+/* 5. 班级课程开设查询 */
+create view 班级课程开设查询 as(
+select zhukx_班级10.zkx_班级编号10, zkx_班级名称10,
+ zhukx_课程10.zkx_课程编号10, zkx_课程名称10,zkx_学分10, zkx_课程学时10
+from zhukx_班级10, zhukx_课程10, zhukx_开设10
+where zhukx_班级10.zkx_班级编号10=zhukx_开设10.zkx_班级编号10
+AND zhukx_开设10.zkx_课程编号10=zhukx_课程10.zkx_课程编号10
+)
+
+/* 6. 生源地平均成绩查询 */
+create view 生源地平均成绩 as(
+select zkx_生源地10, avg(zkx_成绩10) 平均成绩
+from zhukx_学习10, zhukx_学生10
+where zhukx_学习10.zkx_学号10= zhukx_学生10.zkx_学号10
+group by zkx_生源地10
+)
+
+/* 三、索引建立
+1. 教师编号
+*/
+create unique index  教师编号 on zhukx_教师10( zkx_教师编号10 )
+/* 2. 专业编号 */
+create unique index  专业编号 on zhukx_专业10( zkx_专业编号10 )
+/* 3. 班级编号、专业编号 */
+create unique index  班级专业编号 on zhukx_班级10(zkx_班级编号10,zkx_专业编号10 )
+/* 4. 课程编号 */
+create unique index  课程编号 on zhukx_课程10( zkx_课程编号10 )
+/* 5. 学生学号、班级编号 */
+create unique index  学生班级编号 on zhukx_学生10(zkx_学号10, zkx_班级编号10 )
+/* 6. 学生学号、课程编号 */
+create unique index  学生课程编号 on zhukx_学习10(zkx_学号10,zkx_课程编号10 )
+
+/* 四、触发器建立
+1. 学分统计
+*/
+create trigger 学分统计 on zhukx_学习10
+for insert as
+update zhukx_学生10
+set zkx_已修学分总数10=(
+	select SUM(zkx_学分10)
+	from zhukx_课程10
+	where zkx_课程编号10 IN(
+		select zkx_课程编号10
+		from zhukx_学习10
+		where zhukx_学习10.zkx_成绩10>=60
+		AND zhukx_学习10.zkx_学号10 IN{
+			select zkx_学号10
+			from INSERTED}))
+where  zhukx_学生10.zkx_学号10 IN(select zkx_学号10 from INSERTED)
+	
+/* 2. 删除教师 */
+create trigger 删除教师 on zhukx_教师10
+for delete as
+delete zkx_教师编号10
+where zhukx_授课10.zkx_教师编号10=(
+	select zkx_教师编号10
+	from DELETED)
+AND zhukx_上课10.zkx_教师编号10=(
+	select zkx_教师编号10
+	from DELETED)
+/* 3. 更新教师 */
+create trigger 更新教师 on zhukx_教师10
+for update as
+if update (zkx_教师编号10)
+begin
+update zhukx_授课10
+set zkx_教师编号10 = Ins.zkx_教师编号10
+from deleted De,inserted Ins ,zhukx_授课10 K
+where k.zkx_教师编号10=De.zkx_教师编号10
+end
+begin
+update zhukx_上课10
+set zkx_教师编号10 = Ins.zkx_教师编号10
+from deleted De,inserted Ins , zhukx_上课10 K
+where K.zkx_教师编号10=De.zkx_教师编号10
+end
+
+/* 五、存储过程建立
+1. 对学生表插入信息的存储过程
+*/
+create procedure pro_学生表插入信息
+@zkx_学号10 char(20),
+@zkx_姓名10 char(12),
+@zkx_性别10 char(2),
+@zkx_年龄10 int,
+@zkx_生源地10 char(20),
+@zkx_已修学分总数10 int,
+@zkx_班级编号10 char(12)
+as
+insert zhukx_学生10(zkx_学号10,zkx_姓名10,zkx_性别10,
+zkx_年龄10, zkx_生源地10, zkx_已修学分总数10, zkx_班级编号10)
+values(@zkx_学号10,@zkx_姓名10,@zkx_性别10,@zkx_年龄10,
+@zkx_生源地10,@zkx_已修学分总数10,@zkx_班级编号10)
+select * from zhukx_学生10 Go
+
+/* 2. 输入成绩，自动生成其总学分的存储过程 */
+create procedure pro_输入成绩自动生成学分
+@zkx_学号10 char(5),
+@zkx_课程编号10 char(5),
+@zkx_课程名称10 char(20),
+@zkx_学期10 char(10),
+@zkx_成绩10 int,
+@zkx_教师姓名10 char(10),
+@zkx_学分10 int
+as
+begin
+	insert into pro选修
+	values(@zkx_学号10,@zkx_课程编号10,@zkx_成绩10)
+
+	update zhukx_学生10
+	set zhukx_学生10.zkx_已修学分总数10=zhukx_学生10.zkx_已修学分总数10+@zkx_学分10
+	where zhukx_学生10.zkx_学号10=@zkx_学号10
+end

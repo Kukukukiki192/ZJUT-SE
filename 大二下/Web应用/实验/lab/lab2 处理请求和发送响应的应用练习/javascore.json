@@ -1,0 +1,20 @@
+[
+	{
+		"stuid": "201826630601",
+		"name": "王明",
+		"courseName": "java程序设计",
+		"score": 90
+	},
+	{
+		"stuid": "201826630602",
+		"name": "张三",
+		"courseName": "java程序设计",
+		"score": 80
+	},
+{
+		"stuid": "201826630604",
+		"name": "王五",
+		"courseName": "java程序设计",
+		"score": 85
+}
+]

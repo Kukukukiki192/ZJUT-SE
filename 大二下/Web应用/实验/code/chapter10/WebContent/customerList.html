@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Customer List</title>
+<script type="text/javascript" src="js/xmlhttp.js">
+var custName;
+var email;
+var phone;
+var deleteID;
+var PREFIX = "cust-";
+var xmlHttp;
+function createXMLHttpRequest() {
+    if (window.ActiveXObject) {
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }else if (window.XMLHttpRequest) {
+        xmlHttp = new XMLHttpRequest();
+    }
+}
+function addCustomer() {
+    custName = document.getElementById("custName").value;
+    email = document.getElementById("email").value;
+    phone = document.getElementById("phone").value;
+    action = "add";
+    if(custName == "" || email == "" || phone == "") {
+        return;
+    }
+    var url = "customerList.do?"
+        + createAddQueryString(custName, email, phone, "add")
+        + "&ts=" + new Date().getTime();
+    createXMLHttpRequest();
+    xmlHttp.onreadystatechange = handleAddStateChange;
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+}
+ 
+function createAddQueryString(custName, email, phone, action) {
+    var queryString = "custName=" + custName
+        + "&email=" + email
+        + "&phone=" + phone
+        + "&action=" + action;
+    return queryString;
+}
+ 
+function handleAddStateChange() {
+    if(xmlHttp.readyState == 4) {
+        if(xmlHttp.status == 200) {
+            updateCustomerList();
+            clearInputBoxes();
+        }
+        else {
+            alert("添加客户错误！");
+        }
+    }
+}
+function clearInputBoxes() {
+    document.getElementById("custName").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("phone").value = "";
+}
+ 
+function deleteCustomer(id) {
+    deleteID = id;
+    var url = "customerList.do?action=delete"
+        + "&id=" + id
+        + "&ts=" + new Date().getTime();
+    createXMLHttpRequest();
+    xmlHttp.onreadystatechange = handleDeleteStateChange;
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+}
+ 
+function updateCustomerList() {
+    var responseXML = xmlHttp.responseXML;
+var status = 
+responseXML.getElementsByTagName("status")[0].firstChild.nodeValue;
+    status = parseInt(status);
+    if(status != 1) {
+        return;
+    }
+    var row = document.createElement("tr");
+var uniqueID = 
+responseXML.getElementsByTagName("uniqueID")[0].firstChild.nodeValue;
+    
+    row.setAttribute("id", PREFIX + uniqueID);
+    row.appendChild(createCellWithText(custName));
+    row.appendChild(createCellWithText(email));
+    row.appendChild(createCellWithText(phone));
+
+    var deleteButton = document.createElement("input");
+    deleteButton.setAttribute("type", "button");
+    deleteButton.setAttribute("value", "删除");
+    deleteButton.onclick = function () { deleteCustomer(uniqueID); };
+    cell = document.createElement("td");
+    cell.appendChild(deleteButton);
+    row.appendChild(cell);
+    document.getElementById("customerList").appendChild(row);
+    updateCustomerListVisibility();
+}
+ 
+function createCellWithText(text) {
+    var cell = document.createElement("td");
+    cell.appendChild(document.createTextNode(text));
+    return cell;
+}
+ 
+function handleDeleteStateChange() {
+    if(xmlHttp.readyState == 4) {
+        if(xmlHttp.status == 200) {
+            deleteCustomerFromList();
+        }
+        else {
+            alert("删除客户错误！");
+        }
+    }
+}
+function deleteCustomerFromList() {
+    var status =xmlHttp.responseXML.getElementsByTagcustName("status")[0]
+.firstChild.nodeValue;
+    status = parseInt(status);
+    if(status != 1) {
+        return;
+    }
+    var rowToDelete = document.getElementById(PREFIX + deleteID);
+    var customerList = document.getElementById("customerList");
+    customerList.removeChild(rowToDelete);
+    updateCustomerListVisibility();
+}
+ 
+function updateCustomerListVisibility() {
+    var customerList = document.getElementById("customerList");
+    if(customerList.childNodes.length > 0) {
+        document.getElementById("customerListSpan").style.display = "";
+    }
+    else {
+        document.getElementById("customerListSpan").style.display = "none";
+    }
+}
+</script>
+</head>
+<body>
+  <h3>请输入客户信息</h3>
+  <form action="#">
+    <table border="0">
+        <tr><td>客户名：</td><td><input type="text" id="custName"/></td></tr>
+        <tr><td>Email地址：</td><td><input type="text" id="email"/></td></tr>
+        <tr><td>电话：</td><td><input type="text" id="phone"/></td></tr>
+        <tr><td><input type="button" value="添加" onclick="addCustomer();"/>
+            </td>
+        </tr>
+    </table>
+  </form>
+  <span id="customerListSpan" style="display:none;">
+  <h3>客户信息如下：</h3>
+  <table border="1">
+    <tbody id="customerList"></tbody>
+  </table>
+  </span>
+</body>
+</html>
