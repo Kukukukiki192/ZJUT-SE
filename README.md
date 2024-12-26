@@ -41,11 +41,11 @@
   </tr> 
   <tr>
     <td>大学英语</td>
-    <td><a href="https://github.com/Kukukukiki192/ZJUT-SE/tree/main/大一/英语/报告">报告</a></td>
+    <td><a href="https://github.com/Kukukukiki192/ZJUT-SE/tree/main/大一/英语">报告</a></td>
   </tr>
   <tr>
     <td>离散数学</td>
-    <td><a href="https://github.com/Kukukukiki192/ZJUT-SE/tree/main/大一/离散/课件">课件</a></td>
+    <td><a href="https://github.com/Kukukukiki192/ZJUT-SE/tree/main/大一/离散">课件</a></td>
   </tr>
   <tr>
     <td>专业导论</td>
@@ -300,6 +300,7 @@
     <td><a href="https://github.com/Kukukukiki192/ZJUT-SE/tree/main/大四/实习就业/求职">求职</a></td>
   </tr>
 </table>
+
 
 
 ## 项目汇总

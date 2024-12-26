@@ -3,8 +3,8 @@
 
 ### 学习报告
 
-Bumblebee.ppt：大黄蜂-变形金刚第一步独立电影介绍
+Bumblebee：大黄蜂-变形金刚第一步独立电影介绍
 
-News Report.pptx：嫦娥五号任务新闻报道
+News Report：嫦娥五号任务新闻报道
 
-The Avengers 3.docx：复仇者联盟3情景对话
+The Avengers 3：复仇者联盟3情景对话
