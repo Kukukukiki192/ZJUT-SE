@@ -5,55 +5,34 @@
 学习答疑
 > Q
 
-现在学到Mybatis动态SQL那里，只看一遍视频跟着敲一遍代码我记不住。。我得多看几遍
-因为你让我做的那个例子很多都要用springmvc嘛还没做，我尽快把前面结个尾下周边学springMVC边做做看
-然后各个部分有些问题在下面问
+**SpringMVC传值**就是请求参数绑定吗
 
-**这2个我书上目录没找到对应的名词：**
+**rest风格**![](README_img/Java开发实习2.png)
 
-SpringMVC传值就是请求参数绑定吗
-
-rest风格我只看到这个教程有
-
-![](README_img/Java开发实习1.png)
-
-![](README_img/Java开发实习2.png)
-
-**Spring**
-
-![](README_img/Java开发实习3.png)
-
-这里说要学声明式的，书上还有个编程式要会吗
+**Spring** 声明式 编程式
 
 ![](README_img/Java开发实习4.png)
 
-这部分不熟
+**log4j** 这部分不熟
 
-**log4j**
-
-找了些文字教程看有点懵感觉入门还是先看看视频比较上手
-
-[视频教程B站](https://www.bilibili.com/video/BV1iJ411H74S?from=search&seid=5710297530909424450)
+找了些文字教程看有点懵感觉入门还是先看看视频比较上手 [视频教程B站](https://www.bilibili.com/video/BV1iJ411H74S?from=search&seid=5710297530909424450)
 
 课程视频挺多的，但似乎原理啥的等以后熟了再回来看容易懂
 
-它视频右边有课程列表是这样的 我是学完springmvc再看这个还是先看着
-
 ![](README_img/Java开发实习5.png)
-![](README_img/Java开发实习6.png)
-这里说的插件就是mybatis-plus吗
+这里说的插件就是 **mybatis-plus** 吗![](./../../../../k/Photos/img/Java%E5%BC%80%E5%8F%91%E5%AE%9E%E4%B9%A06.png)
 ![](README_img/Java开发实习7.png)
 
 **Junit** 刚好学校课程有讲，学了些简单的操作
 
-**设计模式** 看了两三个，打算先把你发的常见9种学了再看其他的
+**设计模式** 看了两三个，打算先把常见9种学了再看其他的
 
 > A
 
-1. rest和restful 你基本可以理解成一个东西, rest其实是一种理念，restful就是实现rest理念的一种风格
+1. rest和restful 基本可以理解成一个东西, rest其实是一种理念，restful就是实现rest理念的一种风格
 2. 传值和请求参数绑定也是一个东西，传值说的通俗一点
 3. 编程式有空了解，实际开发大家声明式用的多，编程式基本很少写
-4. log4j你放到最后看也可以
+4. log4j放到最后看也可以
 5. mybatis-plus是有人对mybatis进行了二次封装，提供了一些进阶功能，你要看的其实是基础的CURD，两者其实没多大差别
 
 # 配置文件
@@ -290,29 +269,13 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
 [SSM-CRUD.pdf](SSM-CRUD.pdf)
 
-CSDN想要发的博客：
-
-**Java**:
-
-SSM总结 SSM-CRUD
-
-**BigData**:
-
-Linux
-Shell
-MySQL
-Redis
-JVM 边学边总结
-
-狂神说过一遍 做个项目
-
-SpringBoot 导航
+SpringBoot 导航：
 
 [https://www.zhihu.com/question/53729800](https://www.zhihu.com/question/53729800)
 [https://gitee.com/Kukukukiki192/SpringBoot-Learning/tree/master/2.x](https://gitee.com/Kukukukiki192/SpringBoot-Learning/tree/master/2.x)
 [https://gitee.com/Kukukukiki192/iBase4J](https://gitee.com/Kukukukiki192/iBase4J)
 
-# Task
+# 任务
 
 ## 接口文档整理
 
@@ -324,78 +287,14 @@ SpringBoot 导航
 
 以掌医为基础，每个医院有不同的输入输出实例 参数不同，xml怎么统一?
 
+你提供给别人什么调用参数，给出地址，告诉他你会返回什么东西
+
+接口不对的找提供方让他们改
+
+原来**返回的用例**和**文档**不一样
+
 ![](README_img/Java开发实习11.png)
 
-入参用的是xml中的body数据
+## [Task2](Task2.pdf)
 
-不是应该由开发这个模块的人写吗？不然这个接口还没开发的话，接口路径也填不了啊
-而且入参的json数据应该和代码中定义的入参实体类属性一致（虽然写代码时可以根据入参json属性定义）
-
-只能导入json从哪里来的数据？xml导入属性名称格式还是开头大写啊 难道说我要一个一个改成小写？
-
-你提供给别人什么调用参数，给出地址，告诉他你会返回什么东西，ok  
-接口不对的找提供方让他们改
-原来**返回的用例**和**文档**不一样
-#### 1 个人中心
-
-绑卡
-- 初诊建档 获取卡列表
-- 复诊绑卡 绑卡
-  报告查询
-- 检查报告查询（待定）
-- 检验报告查询
-    - 列表查询
-    - 详情查询
-      **住院**患者信息查询
-      叫号、**签到（补）**
-      PACS（影像报告）
-      患者全息视图（待定）
-#### 2 内容中心
-
-科室查询 
-医生查询 
-排班查询 
-号源查询 九龙没有具体的号源
-停复诊
-#### 3 预约中心
-
-锁号 九龙：确认预约->apply->list(预约挂号记录查询)
-确认锁号 九龙没有具体的号源
-退号（取消号源）resp有中文乱码
-状态查询（用于异常重试）
-就诊/预约挂号记录查询（HZZX120）个人中心->预约中心 小程序上分为就诊记录medicalRecords、预约挂号记录list(resp中文乱码)
-
-#### 4 费用中心
-
-查询未缴费账单 没找到"1、获取未缴费账单"getPaidBillDetail这个接口
-
-门诊缴费
-1. 获取门诊账单 无resp
-2. 账单缴费
-3. 状态回查（门诊缴费账单状态查询）
-
-住院服务
-1. 每日住院清单查询
-2. 住院**充值**
-- 余额查询
-- 充值 初始化订单tocharge (点"确认充值"trade)
-- **充值状态查询 （补）**
-  
-
-快速开单（待定）
-
-个人中心->费用中心
-
-2.3.8 住院每日费用清单查询（HZZX091）
-
-2.3.9 门诊费用记录查询（HZZX092）
-
-2.3.10 住院**充值记录**查询（HZZX093） 小程序上分为全渠道充值记录、小程序充值记录
-
-## Task2
-
-[Task2.pdf](Task2.pdf)
-
-## Task3
-
-[Task3.pdf](Task3.pdf)
+## [Task3](Task3.pdf)
