@@ -1,0 +1,33 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: OSgraphics - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ibm\LOCALS~1\Temp\RSP8BA.tmp" with contents
+[
+/nologo /out:".\OSgraphics.lib" 
+".\Release\Arc.obj"
+".\Release\AreaFtr.obj"
+".\Release\Circle.obj"
+".\Release\Feature.obj"
+".\Release\LineFtr.obj"
+".\Release\PointFtr.obj"
+".\Release\PolyLine.obj"
+".\Release\Rectangle.obj"
+".\Release\Square.obj"
+".\Release\Text.obj"
+]
+Creating command line "link.exe -lib @C:\DOCUME~1\ibm\LOCALS~1\Temp\RSP8BA.tmp"
+<h3>Output Window</h3>
+Creating library...
+
+
+
+<h3>Results</h3>
+OSgraphics.lib - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,115 @@
+delete from Account WHERE A_id=?
+create trigger 销户 on Account
+for delete
+as
+delete Account.A_id
+where Have.A_id=(
+	select Have.A_id
+	from DELETED
+)
+
+delete from Have WHERE Have.A_id=2222222222222222222 and U_id=530103200008183724
+delete from Account WHERE Account.A_id=2222222222222222222;
+
+
+drop trigger 删除账户
+
+create trigger 销户 on Account
+INSTEAD OF delete
+　　as
+　　delete from Have
+　　where A_id in 
+　　(select A_id from deleted)
+
+
+create table L(
+L_id int primary key,
+U_id char(18),
+U_name varchar(20),
+A_id varchar(20),
+L_money money,
+L_date date,
+B_name varchar(20),
+S_name varchar(20)
+)
+
+alter table Repay
+add U_id char(18)
+
+select A_id,sum(L_money) as L_moneys
+from L
+where U_id=?
+group by A_id
+
+select A_id,sum(L_money) as L_moneys from L where U_id=? group by A_id
+
+create table In1(
+U_id char(18),
+A_id varchar(20),
+I_money money,
+I_time datetime primary key
+)
+
+create table Out1(
+U_id char(18),
+A_id varchar(20),
+O_money money,
+O_time datetime primary key
+)
+
+create table Transfer1(
+U_id char(18),
+A_id varchar(20),
+A_id1 varchar(20),
+T_money money,
+T_time datetime primary key
+)
+
+create table Repay1(
+U_id char(18),
+A_id varchar(20),
+L_id char(4),
+R_money money,
+R_time datetime primary key
+)
+
+create view 存款 as(
+select Time,Type,Money
+from records
+where Type='存款'
+)
+
+create view 取款 as(
+select Time,Type,Money
+from records
+where Type='取款'
+)
+
+create view 转帐 as(
+select Time,Type,Money
+from records
+where Type='转帐'
+)
+
+create view 收款 as(
+select Time,Type,Money
+from records
+where Type='收款'
+)
+
+create view 还款 as(
+select Time,Type,Money
+from records
+where Type='还款'
+)
+
+create table records(
+U_id char(18),
+A_id varchar(20),
+Time datetime,
+Type char(4),
+Money money,
+)
+
+
+

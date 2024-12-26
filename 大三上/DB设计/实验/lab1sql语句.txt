@@ -1,0 +1,244 @@
+一、SQL编写
+1.
+select SupplierID,CompanyName,Region,City,Phone 
+from Suppliers
+where Region='MA' or Region='OR' or City='Berlin'
+2.
+select SupplierID,CompanyName,Region,City,Phone 
+from Suppliers
+where Region='MA' and ContactTitle='Sales Representative'
+3.
+select Orders.OrderID,ShipName,ProductName
+from Orders,[dbo].[Order Details],Products
+where (Orders.OrderID='10248' or Orders.OrderID='10254')
+and Orders.OrderID=[dbo].[Order Details].OrderID
+and [dbo].[Order Details].ProductID=Products.ProductID
+4.
+select Orders.OrderID,ProductName,Quantity,[dbo].[Order Details].UnitPrice,Discount
+from Orders,[dbo].[Order Details],Products
+where (Orders.OrderID='10248' or Orders.OrderID='10254')
+and Orders.OrderID=[dbo].[Order Details].OrderID
+and [dbo].[Order Details].ProductID=Products.ProductID
+5.
+select Orders.OrderID,ProductName,Quantity*[dbo].[Order Details].UnitPrice*(1-Discount) as Sales
+from Orders,[dbo].[Order Details],Products
+where (Orders.OrderID='10248' or Orders.OrderID='10254')
+and Orders.OrderID=[dbo].[Order Details].OrderID
+and [dbo].[Order Details].ProductID=Products.ProductID
+6.
+select ProductName,UnitPrice,CompanyName,Phone 
+from Products,Suppliers
+where UnitPrice>20
+and Products.SupplierID=Suppliers.SupplierID
+7.
+select Orders.OrderID,ProductName,Quantity
+from Orders,[dbo].[Order Details],Products
+where (ShipCity='Berlin' or ShipCity='London')//ShipCity in ('Berlin' ,'London')
+and year(OrderDate)=1996
+and Orders.OrderID=[dbo].[Order Details].OrderID
+and [dbo].[Order Details].ProductID=Products.ProductID
+8.
+select Orders.OrderID,ProductName,Quantity*[dbo].[Order Details].UnitPrice*(1-Discount) as Sales
+from Orders,[dbo].[Order Details],Products
+where ShipRegion='BC'
+and Orders.OrderID=[dbo].[Order Details].OrderID
+and [dbo].[Order Details].ProductID=Products.ProductID
+9.
+select CompanyName,count(OrderID) as OrderCount
+from Orders,Shippers
+where year(OrderDate)=1997
+and ShipVia=ShipperID
+group by CompanyName
+10.
+select CategoryID,avg(UnitPrice) as AvgUnitPrice
+from Products
+group by CategoryID
+order by AvgUnitPrice desc
+11.
+select ProductID,Quantity,OrderDate
+from Orders,[dbo].[Order Details]
+where year(OrderDate)=1997
+and month(OrderDate)<=6
+and Orders.OrderID=[dbo].[Order Details].OrderID
+12.
+select CategoryID,avg(UnitPrice) as AvgUnitPrice
+from Products
+group by CategoryID
+13.//UnitsOnOrder*Quantity*[dbo].[Order Details].UnitPrice*(1-Discount) as TotalSales
+select DISTINCT top 5 CompanyName,ProductName,UnitsOnOrder
+from Products,[dbo].[Order Details],Suppliers
+where Products.SupplierID=Suppliers.SupplierID
+and [dbo].[Order Details].ProductID=Products.ProductID
+group by ProductID
+order by UnitsOnOrder desc
+二、存储过程
+1.
+create proc proc1
+as
+   	select OrderDate,OrderID,CompanyName,LastName,FirstName
+	from Orders,Customers,Employees
+	where year(OrderDate)=1996
+	and month(OrderDate)=7
+	and day(OrderDate)<16
+	and Orders.CustomerID=Customers.CustomerID
+	and Orders.EmployeeID=Employees.EmployeeID
+	order by LastName,FirstName,OrderID desc
+go
+exec proc1
+2.
+create proc proc1_1(@startId varchar(20), @endId varchar(20))
+as
+  	select OrderDate,OrderID,CompanyName,LastName,FirstName
+	from Orders,Customers,Employees
+	where OrderDate between convert(datetime,@startId, 20) and convert(datetime,@endId, 20)
+	and Orders.CustomerID=Customers.CustomerID
+	and Orders.EmployeeID=Employees.EmployeeID
+	order by LastName,FirstName,OrderID desc    
+go
+exec proc1_1 '1996-07-01','1996-07-15'
+3.
+create proc proc2(@CustomerID nchar(5))
+as
+	select CustomerID,OrderID,OrderDate,RequiredDate,ShippedDate
+	from Orders
+	where CustomerID=@CustomerID
+go
+exec proc2 'ANTON'
+4.
+create proc proc3(@OrderID nchar(5))
+as
+	select OrderID,ProductName,[dbo].[Order Details].UnitPrice,Quantity,Discount,
+	Quantity*[dbo].[Order Details].UnitPrice*(1-Discount) as Sales
+	from [dbo].[Order Details],Products
+	where OrderID=@OrderID
+	and [dbo].[Order Details].ProductID=Products.ProductID
+go
+exec proc3 '10254'
+5.
+create proc proc4
+as
+	-- 使用游标查询Products表中的所有产品号和打八折的价格,并将其依次打印出来
+	declare  c_prod  cursor for select CONVERT(varchar, ProductID)+'	'
+	+CONVERT(varchar, UnitPrice*0.8) from Products  --声明变量接收游标中的数据
+	OPEN c_prod -- 打开游标
+		declare @x nvarchar(20)
+		fetch next from c_prod INTO @x  --获取c_prod的下一条数据，赋值给@x
+		print('ProductID UnitPrice')
+		while @@FETCH_STATUS=0 --假如检索到了数据继续执行
+			begin
+				print(@x) --print()打印变量 随便发挥
+				fetch next from c_prod INTO @x  --获取c_prod的下一条数据，赋值给@x
+			end
+	CLOSE c_prod --关闭游标
+go
+exec proc4
+//DEALLOCATE c_prod 删除游标
+6.
+create procedure addTotal
+as
+--declare @UnitPrice money
+--declare @Quantity smallint
+--declare @Discount real
+declare @OrderID int
+declare c_total cursor for
+select OrderID from [dbo].[Orders]
+open c_total 
+fetch next from c_total into @OrderID
+while @@FETCH_STATUS=0
+begin
+	update [dbo].[Orders] set Total=
+	(select sum(UnitPrice*(1-Discount)*Quantity)
+	--(UnitPrice*(1-Discount)*Quantity)
+	from [dbo].[Order Details]
+	where OrderID=@OrderID
+	group by OrderID
+	)
+fetch next from c_total into @OrderID
+end
+close c_total
+deallocate c_total
+
+DROP PROCEDURE salesVolume
+7.
+create trigger tri_total on [dbo].[Order Details]
+for insert
+as
+begin
+	declare @OrderID int,@UnitPrice money,@Quantity smallint,@Discount real;
+	select @OrderID=OrderID,@UnitPrice=UnitPrice,@Quantity=Quantity,@Discount=Discount
+	from inserted
+	update [dbo].[Orders] set Total=
+	(select sum(UnitPrice*(1-Discount)*Quantity)
+	--(UnitPrice*(1-Discount)*Quantity)
+	from [dbo].[Order Details]
+	where OrderID=@OrderID
+	group by OrderID
+	)
+end
+8.
+create procedure salesVolume
+as
+declare @year datetime
+begin 
+	select 
+	((select sum(Quantity*(1-Discount)*[dbo].[Order Details].UnitPrice) 
+	from [dbo].[Order Details],[dbo].[Orders],[dbo].[Products]
+	where year(OrderDate)=@year
+	and [dbo].[Orders].OrderID=[dbo].[Order Details].OrderID
+	and [dbo].[Order Details].ProductID=[dbo].[Products].ProductID
+	group by [dbo].[Products].ProductID
+	)/(select sum(Quantity*(1-Discount)*[dbo].[Order Details].UnitPrice)
+	from [dbo].[Order Details],[dbo].[Orders] 
+	where year(OrderDate)=@year
+	and [dbo].[Orders].OrderID=[dbo].[Order Details].OrderID
+	group by year(OrderDate)
+	)
+	)as salesVolume
+end
+9.
+create procedure salesVolume_mouth
+as
+declare @month datetime
+declare @year datetime
+begin 
+	select 
+	((select sum(Quantity*(1-Discount)*[dbo].[Order Details].UnitPrice)
+	from [dbo].[Order Details],[dbo].[Orders],[dbo].[Products]
+	where month(OrderDate)=@month
+	and year(OrderDate)=@year
+	and [dbo].[Orders].OrderID=[dbo].[Order Details].OrderID
+	and [dbo].[Order Details].ProductID=[dbo].[Products].ProductID
+	group by [dbo].[Products].ProductID
+	)/(select sum(Quantity*(1-Discount)*[dbo].[Order Details].UnitPrice)
+	from [dbo].[Order Details],[dbo].[Orders] 
+	where month(OrderDate)=@month
+	and year(OrderDate)=@year
+	and [dbo].[Orders].OrderID=[dbo].[Order Details].OrderID
+	group by year(OrderDate),month(OrderDate)
+	)
+	)as salesVolume,
+
+	((select sum(Quantity) 
+	from [dbo].[Order Details],[dbo].[Orders],[dbo].[Products]
+	where month(OrderDate)=@month
+	and year(OrderDate)=@year
+	and [dbo].[Orders].OrderID=[dbo].[Order Details].OrderID
+	and [dbo].[Order Details].ProductID=[dbo].[Products].ProductID
+	group by [dbo].[Products].ProductID
+	)/(select sum(Quantity)
+	from [dbo].[Order Details],[dbo].[Orders] 
+	where month(OrderDate)=@month
+	and year(OrderDate)=@year
+	and [dbo].[Orders].OrderID=[dbo].[Order Details].OrderID
+	group by year(OrderDate),month(OrderDate)
+	)
+	)as salesQuantity
+end
+
+
+
+
+
+
+
+

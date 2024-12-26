@@ -1,0 +1,74 @@
+存储过程
+一、不带参
+1.创建
+if (exists (select * from sys.objects where name = 'proc_get_S'))
+    drop proc proc_get_S
+go
+create proc proc_get_S
+as
+    select * from Zhukx_Students;
+执行 exec proc_get_S;
+2.修改
+alter proc proc_get_S
+as
+    select * from Zhukx_Students where zkx_Sno='S09';
+二、带参
+1.创建
+create proc proc_find_T(@startId int, @endId int)
+as
+    select * from Teachers where Tage between @startId and @endId
+go
+执行 exec proc_find_T 10,15;
+三、带通配符参数
+create proc proc_findSByName(@name varchar(20) = '%a%', @nextName varchar(20) = '%')
+as
+    select * from S where lastName like @name and lastName like @nextName;
+go
+
+exec proc_findSByName '%t%','%r%';
+四、带输出参数
+create proc proc_getEmployeeRecord(
+    @name varchar(20) , --默认输入参数
+    @country varchar(20) out, --输出参数
+    @title varchar(20) output--输入输出参数
+)
+as
+    select @country = country,@title=title  from employees where lastName = @name and title = @title;
+   go
+
+declare @name varchar(20),
+@country varchar(20),
+@title varchar(20);
+set @name = 'Davolio';
+set @title = 'Sales Representative';
+
+exec proc_getEmployeeRecord @name, @country out, @title output;
+select @name, @country;
+print @name + '-' + @country;
+
+用户自定义函数
+CREATE FUNCTION getEmployeeNamebyID (@id int)
+RETURNS  nvarchar(20)
+AS
+BEGIN
+	DECLARE @emplyeeName nvarchar(20)
+	SELECT @emplyeeName = employees.FirstName + ' ' + Employees.LastName from Employees where EmployeeID = @id
+	RETURN 
+	   @emplyeeName 
+END
+
+select dbo.getEmployeeNamebyID(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

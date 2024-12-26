@@ -1,0 +1,111 @@
+--1
+--CREATE VIEW v_material_storage_record_1 as
+--select [t_material storage record].id as 'record_id',[material in out id] as 'material_in_id',t_material.id as 'material_id',t_material.name as 'material_name',
+--[t_material in].quantity as 'material_in_quantity',operate as 'material_operate',[storage id] as 'storage_id',t_storage.name as 'storage_name',
+--[t_material storage record].quantity as 'material_remained_quantity',[t_material storage record].data as 'material_data'
+--FROM [t_material storage record],[t_material in],t_material,t_storage
+--WHERE [t_material storage record].[material in out id] = [t_material in].id and t_material.id = [t_material in].id and t_storage.id = [t_material storage record].[storage id]
+
+--2
+--CREATE VIEW v_material_storage_record_2 as
+--select [t_material storage record].id as 'record_id',[material in out id] as 'material_out_id',t_material.id as 'material_id',
+--t_material.name as 'material_name',[t_material out].quantity as 'quantity',quality as 'quality',
+--[t_manufacturing shop].id,operate as 'operate',[storage id] as 'storage_id',t_storage.name as 'storage_name',
+--[t_material storage record].quantity as 'remained_quantity',[t_material storage record].data as 'record_time'
+--FROM [t_material storage record],[t_material out],t_material,t_storage,[t_manufacturing shop]
+--WHERE [t_material storage record].[material in out id] = [t_material out].id and [t_material out].[shop id] = [t_manufacturing shop].id
+--and [t_material out].[material id] = t_material.id and t_storage.id = [t_material storage record].[storage id]
+
+
+--3
+--CREATE VIEW v_product_storage_record_1 as
+--Select [t_product storage record].id as 'record_id',[product in out id] as 'product_in_id',t_product.id as 'product_id',
+--t_product.id as 'product_name',[t_product in].quantity as 'product_in_quantity',[t_product in].quality as 'product_quality',
+--[shop id] as 'product_shop_id',operate as 'product_operate',t_storage.id as 'product_storage_id',t_storage.name as 'product_storage_name',
+--[t_product storage record].quantity as 'product_remained_quantity',[t_product storage record].data as 'record_time'
+--From
+--[t_product storage record]
+--join [t_product in]
+--on [t_product in].id = [t_product storage record].[product in out id]
+--join t_product
+--on [t_product in].[product id] = t_product.id
+--join t_storage
+--on [t_product storage record].[storage id] = t_storage.id
+
+
+--4
+--CREATE VIEW [v_product_storage_record_2] AS
+--SELECT [t_product storage record].id as record_id,[t_product out].id as product_out_id,[t_product out].[product id] as product_id,t_product.name as product_name,
+--[t_product out].quantity as product_out_quantity,[t_product detailed account].univalue as product_univalue,
+--[t_product detailed account].univalue*[t_product out].quantity as product_out_total_amount,[t_product detailed account].operate as product_operator,
+--[t_product storage record].[storage id] as product_storage_id,t_storage.name as product_storage_name,[t_product detailed account].quantity as product_remained_quantity,
+--[t_product detailed account].data as product_data
+--from [t_storage],t_product,[t_product detailed account],[t_product out],[t_product storage record]
+--WHERE t_storage.id = [t_product storage record].[storage id] and [t_product storage record].[product in out id] = [t_product out].id 
+--and t_product.id = [t_product out].[product id] and t_product.id = [t_product detailed account].[product in out id]
+
+--5
+--CREATE VIEW [v_material_detail_account_1] AS
+--SELECT [t_material detailed account].id as account_id,[t_material in].id as material_in_id,[t_material in].[material id] as material_id,
+--t_material.name as material_name,[t_material in].quantity as material_quantity,[t_material in].univalue as material_univalue,[t_material in].amount as material_in_amount,
+--[t_material storage record].operate as material_operator,[t_material detailed account].quantity as material_remained_quantity,[t_material detailed account].[total amount] as material_remained_total_amount,
+--[t_material detailed account].data as material_data
+--FROM [t_material],[t_material detailed account],[t_material in],[t_material storage record]
+--WHERE t_material.id = [t_material in].[material id] and [t_material detailed account].[material in out id] = [t_material in].id 
+--and [t_material storage record].[material in out id] = [t_material in].id
+
+--6
+--CREATE VIEW [v_material_detail_account_2] AS
+--SELECT [t_material detailed account].id as account_id,[t_material out].id as material_out_id,[t_material out].[material id] as material_id,
+--t_material.name as material_name,[t_material out].quantity as material_quantity,[t_material detailed account].univalue as material_univalue,
+--[t_material detailed account].univalue*[t_material out].quantity as material_out_amount,[t_material out].[shop id] as material_shop_id,
+--[t_material storage record].operate as material_operator,[t_material detailed account].quantity as material_remained_quantity,[t_material detailed account].[total amount] as material_remained_total_amount,
+--[t_material detailed account].data as material_data
+--FROM [t_material],[t_material detailed account],[t_material out],[t_material storage record]
+--WHERE t_material.id = [t_material out].[material id] and [t_material detailed account].[material in out id] = [t_material out].id 
+--and [t_material storage record].[material in out id] = [t_material out].id
+
+--7
+--CREATE VIEW v_product_detailed_account_1 AS
+--SELECT
+--[t_product detailed account].id as 'account_id',[t_product detailed account].[product in out id] as 'product_in_id',
+--[t_product in].[product id] as 'product_id',t_product.name as 'product_name',
+--[t_product in].quantity as 'product_in_quantity',[t_product in].univalue as 'product_in_univalue',
+--[t_product in].amount as 'product_in_amount',[t_manufacturing shop].name as 'product_manufacturing_shop',
+--[t_product detailed account].operate as 'product_operator',[t_product detailed account].quantity as 'product_remained_quantity',
+--[t_product detailed account].[total amount] as 'product_remained_amount',
+--[t_product detailed account].data as 'record_data'
+--from [t_product detailed account]
+--join [t_product in]
+--on [t_product detailed account].[product in out id]=[t_product in].id
+--join t_product
+--on [t_product in].[product id]=t_product.id
+--join [t_manufacturing shop]
+--on [t_product in].[shop id]=[t_manufacturing shop].id
+
+--8
+--CREATE VIEW v_product_detailed_account_2 AS
+--SELECT
+--[t_product detailed account].id as 'account_id',[t_product detailed account].[product in out id] as 'product_out_id',
+--[t_product out].[product id] as 'product_id',t_product.name as 'product_name',[t_product out].quantity as 'product_out_quantity',
+--[t_product detailed account].univalue as 'product_out_univalue',[t_product detailed account].amount as 'product_out_amount',
+--[t_product detailed account].operate as 'product_operator',[t_product detailed account].quantity as 'product_remained_quantity',
+--[t_product detailed account].[total amount] as 'product_amount',[t_product detailed account].data as 'record_data'
+--from [t_product detailed account]
+--join [t_product out]
+--on [t_product detailed account].[product in out id]=[t_product out].id
+--join t_product
+--on [t_product out].[product id]=t_product.id
+
+----9
+
+--CREATE VIEW v_sell_statistics AS
+--SELECT
+--[t_sell record].id as 'id',
+--[t_sell record].[product id] as 'product_id',
+--max(t_product.name) as 'product_name',
+--sum([t_sell record].quantity) as 'sell_quantity',
+--[t_sell record].data as 'data'
+--from [t_sell record],t_product
+--where t_product.id=[t_sell record].id
+--group by [t_sell record].id,[t_sell record].data,[t_sell record].[product id]

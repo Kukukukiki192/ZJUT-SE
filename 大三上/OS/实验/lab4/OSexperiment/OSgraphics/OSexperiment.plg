@@ -1,0 +1,69 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: OSexperiment - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\guguomin\LOCALS~1\Temp\RSP119.tmp" with contents
+[
+/nologo /subsystem:windows /incremental:yes /pdb:"Debug/OSexperiment.pdb" /debug /machine:I386 /out:"Debug/OSexperiment.exe" /pdbtype:sept 
+".\Debug\Arc.obj"
+".\Debug\AreaFtr.obj"
+".\Debug\Circle.obj"
+".\Debug\Cirque.obj"
+".\Debug\Feature.obj"
+".\Debug\LineFtr.obj"
+".\Debug\MainFrm.obj"
+".\Debug\OSexperiment.obj"
+".\Debug\OSexperimentDoc.obj"
+".\Debug\OSexperimentView.obj"
+".\Debug\PointFtr.obj"
+".\Debug\PolyLine.obj"
+".\Debug\Rectangle.obj"
+".\Debug\Square.obj"
+".\Debug\StdAfx.obj"
+".\Debug\Text.obj"
+".\Debug\OSexperiment.res"
+]
+Creating command line "link.exe @C:\DOCUME~1\guguomin\LOCALS~1\Temp\RSP119.tmp"
+<h3>Output Window</h3>
+Linking...
+Rectangle.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall CPoly::Draw(class CDC *)" (?Draw@CPoly@@UAEXPAVCDC@@@Z)
+Square.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall CPoly::Draw(class CDC *)" (?Draw@CPoly@@UAEXPAVCDC@@@Z)
+Rectangle.obj : error LNK2001: unresolved external symbol "public: __thiscall CPoly::CPoly(void)" (??0CPoly@@QAE@XZ)
+Rectangle.obj : error LNK2001: unresolved external symbol "public: virtual __thiscall CPoly::~CPoly(void)" (??1CPoly@@UAE@XZ)
+Rectangle.obj : error LNK2001: unresolved external symbol "public: __thiscall CPoly::CPoly(unsigned long,short,short,unsigned long,short,int,class CPoint *,short)" (??0CPoly@@QAE@KFFKFHPAVCPoint@@F@Z)
+Debug/OSexperiment.exe : fatal error LNK1120: 4 unresolved externals
+Error executing link.exe.
+Creating temporary file "C:\DOCUME~1\guguomin\LOCALS~1\Temp\RSP11B.tmp" with contents
+[
+/nologo /o"Debug/OSexperiment.bsc" 
+".\Debug\StdAfx.sbr"
+".\Debug\Arc.sbr"
+".\Debug\AreaFtr.sbr"
+".\Debug\Circle.sbr"
+".\Debug\Cirque.sbr"
+".\Debug\Feature.sbr"
+".\Debug\LineFtr.sbr"
+".\Debug\MainFrm.sbr"
+".\Debug\OSexperiment.sbr"
+".\Debug\OSexperimentDoc.sbr"
+".\Debug\OSexperimentView.sbr"
+".\Debug\PointFtr.sbr"
+".\Debug\PolyLine.sbr"
+".\Debug\Rectangle.sbr"
+".\Debug\Square.sbr"
+".\Debug\Text.sbr"]
+Creating command line "bscmake.exe @C:\DOCUME~1\guguomin\LOCALS~1\Temp\RSP11B.tmp"
+Creating browse info file...
+<h3>Output Window</h3>
+
+
+
+<h3>Results</h3>
+OSexperiment.exe - 6 error(s), 0 warning(s)
+</pre>
+</body>
+</html>
