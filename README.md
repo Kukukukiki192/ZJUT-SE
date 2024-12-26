@@ -6,7 +6,7 @@
 
 本仓库是本科专业期间的学习内容集合，包括课程作业、试卷、实验、项目代码、设计文档、报告及部分学习笔记、教材、教学视频等
 
-仓库未启用 `git-lfs` ，`>100M` 的大文件另存于[网盘👉](https://pan.baidu.com/s/1_R9StVa4tUPS5H3McI6wsA?pwd=1111)
+仓库未启用 `git-lfs` ，`>100M` 的大文件另存于<img src="https://nd-static.bdstatic.com/m-static/v20-main/favicon-main.ico" width="18">[网盘](https://pan.baidu.com/s/1_R9StVa4tUPS5H3McI6wsA?pwd=1111)
 
 ## 目录结构
 
@@ -19,7 +19,7 @@
     <td>内容</td>
   </tr>
   <tr>
-    <td rowspan="11">大一</td>
+    <td rowspan="12">大一</td>
     <td rowspan="4">C++程序设计</td>
     <td><a href="https://github.com/Kukukukiki192/ZJUT-SE/tree/main/大一/C++/课件">课件</a></td>
   </tr>
@@ -57,7 +57,10 @@
   </tr>
   <tr>
     <td>大学生职业发展与就业指导【任】</td>
-    <td><a href="https://github.com/Kukukukiki192/ZJUT-SE/tree/main/大一/职规">课件 报告</a></td>
+    <td><a href="https://github.com/Kukukukiki192/ZJUT-SE/tree/main/大一/职规">课件</a></td>
+  </tr>
+  <tr>
+    <td><a href="https://github.com/Kukukukiki192/ZJUT-SE/tree/main/大一/其它">其它</a></td>
   </tr>
   <tr>
     <td rowspan="11">大二上</td>
@@ -297,6 +300,7 @@
     <td><a href="https://github.com/Kukukukiki192/ZJUT-SE/tree/main/大四/实习就业/求职">求职</a></td>
   </tr>
 </table>
+
 
 ## 项目汇总
 
