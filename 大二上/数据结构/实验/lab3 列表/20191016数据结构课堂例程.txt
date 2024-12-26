@@ -1,0 +1,123 @@
+// 拷贝构造函数的实现 方案一
+Linked_list::Linked_List(const Linked_List& origList){
+if(origList.first==NULL) //if(empty(origList))
+    first=NULL;
+else{
+    NodePointer nptr=new node((origList.first)->data),tail=nptr;
+    first=nptr;
+    //第一个从无到有
+
+    NodePointer ptr=origList.first->next;
+    while(ptr!=NULL)
+   {
+      nptr=new node(ptr->data);
+     // nptr->data=ptr->data;
+      //nptr->next=NULL;
+      tail->next=nptr;
+      ptr=ptr->next;
+      tail=nptr;
+    }    
+}//else
+}
+
+//利用哨兵简化拷贝 方案二
+Linked_list::Linked_List(const Linked_List& origList){
+NodePointer ptr=origList.first;
+first=new node; //加哨兵
+NodePointer tail=first,nptr;
+while(ptr)
+{  nptr=new node(ptr->data);
+    tail->next=nptr;
+     tail=nptr;
+     ptr=ptr->next;    
+}
+ptr=first;
+first=first->next;
+delete ptr;//删除哨兵   
+}
+
+//修改后的node
+class node{
+public:
+   node(elementType d){ data=d;  next=NULL;}
+   elementType data;
+   node* next;
+}
+
+赋值重载函数的实现 方案一：参考动态数组实现的列表中的空间处理方案
+Linked_List&  Linked_List::operator =(const Linked_List &rightHandSide){
+ if(this!=&rightHandSide){
+   if(mySize!=origList.mySize){
+   //删除this->first为表首的所有节点
+   this->~Linked_List();//析构函数体的代码放在这里
+   first=new node;
+   NodePointer tail=first;
+   NodePointer ptr=rightHandSide.first，nptr;
+   while(ptr!=NULL)
+   {
+        nptr=new node(ptr->data);
+        tail->next=nptr;
+        tail=nptr;
+        ptr=ptr->next;
+   }
+   nptr=first;
+   first=nptr->next;
+   delete nptr;
+  }
+  mySize=rightHandSide.mySize;
+ }
+  else{//节点值对拷
+     NodePointer ptr=rightHandSide.first, thisPtr=first;
+     while(ptr!=NULL)
+    {  thisPtr->data=ptr->data;
+      thisPtr=thisPtr->next;
+      ptr=ptr->next;
+    }
+ }
+    
+}
+
+
+
+赋值重载函数的实现 方案二：参考动态数组实现的列表中的空间处理方案
+Linked_List&  Linked_List::operator =(const Linked_List &rightHandSide){
+if(mySize<origList.mySize)//补不足结点
+{ NodePointer tail=first; //（*this）
+  NodePointer ptr=rightHandSide.first;
+  while(tail->next!=NULL)
+  {
+     tail->data=ptr->data;
+     tail=tail->next;
+     ptr=ptr->next;
+  }
+  tail->data=ptr->data;
+  ptr=ptr->next;
+  NodePointer nptr;
+  while(ptr!=NULL)
+  {
+     nptr=new node(ptr->data);
+     tail->next=nptr;
+     tail=nptr;
+     ptr=ptr->next;
+  }
+
+}
+else if(mySize>origList.mySize)//删除多余结点
+{
+    NodePointer thisPtr=first; //（*this）
+   NodePointer ptr=rightHandSide.first;
+   while(ptr!=NULL)
+   {
+      thisPtr->data=ptr->data;
+      thisPtr->next;
+      ptr=ptr->next
+    }
+    while(thisPtr!=NULL)
+   {    ptr=thisPtr->next;
+        delete thisPtr;
+        thisPtr=ptr;  
+   }
+}
+else{//结点个数相等，节点值对拷
+ }
+}

@@ -1,0 +1,121 @@
+//LQueue.h p366改造成基于循环链的循环链式队列。取个新名字叫做CQueue
+
+typedef int QueueElement;
+class Node{
+public:
+   QueueElement data;
+   Node* next;
+   Node(QueueElement d,Node* n=0):data(d),next(n){}
+};
+Typedef Node* NodePointer;
+
+class CQueue{ //基于循环链的队列类
+private:
+    	NodePointer last;//队尾，也是队首的前驱。循环链表的表尾指针 
+public:
+	CQueue();//构造空队列p369改造
+	CQueue(const CQueue& original);//复制构造函数p369改造
+	const CQueue& operator=(const CQueue& right);//赋值p370改造
+	~CQueue();//析构函数p370改造
+	bool empty() const;//判空p371
+	void enQueue(const QueueElement& item);//入队p371
+	void deQueue();//出队p372
+	QueueElement front() const;//访问队首p372
+	void display(ostream& out) const; //显示队列里所有元素p371
+};
+
+//类的实现，注意结合书上的循环链图示理解。注意比较与单向链表实现的差异。
+
+CQueue::CQueue()  //构造空队列p369改造
+{ last=NULL;   }
+
+CQueue::CQueue(const Queue& original) //复制构造函数p369改造
+{   
+       if(!original.empty()){ //赋值右值对象不空                       
+              last=new node(original.last->data,last);
+              NodePointer  originalPtr=original.last->next, Ptr=last;
+              while(originalPtr!=original.last){
+                  Ptr->next=new node(originalPtr->data,last);
+                  Ptr=Ptr->next;
+                  originalPtr=originalPtr->next;
+              }        
+         }
+         else last=NULL;
+}
+
+const Queue& CQueue::operator=(const Queue& right) //赋值p370改造
+{   if(this!=&right){//不是自赋值
+         if(!right.empty()){ //赋值右值对象不空
+              this->~CQueue(); //回收赋值左值的空间
+              
+              last=new node(right.last->data,last);
+              NodePointer  rightPtr=right.last->next, Ptr=last;
+              while(rightPtr!=right.last){
+                  Ptr->next=new node(rightPtr->data,last);
+                  Ptr=Ptr->next;
+                  rightPtr=rightPtr->next;
+              }              
+         }
+   }
+}
+
+CQueue::~CQueue()//析构函数p370改造
+{   if(!empty()){
+       NodePointer first=last->next;
+       last->next=NULL;
+       while(first!=NULL)
+      {   last=first->next;
+           delete first;
+           first=last;
+      }
+    }    
+}
+
+bool CQueue::empty() const//判空p371
+{   return  last==NULL;
+}
+
+void CQueue::enQueue(const QueueElement& item)//入队p371
+{   NodePointer Newptr=new node(item);
+     if(empty()) { //向空队列中添加元素
+         last=Newptr;
+         last->next=last;
+     }
+    else{
+       Newptr->next=last->next; //修正循环链
+       last->next=Newptr;//添加新元素到队尾
+   }
+}
+
+void CQueue::deQueue()//出队p372
+{   if(!empty()){
+       if(last->next==last) //队列中只有一个元素
+       {   delete last;
+           last=NULL;
+        }
+       else{
+          NodePointer ptr=last->next;
+          last->next=ptr->next;  //维护循环链
+          delete ptr; //删除队首元素结点
+          }
+     }   
+}
+
+QueueElement CQueue::front() const //访问队首p372
+{ if(!empty())  
+  {  NodePointer first=last->next;
+       return first->data;   }
+   else {
+      QueueElement garbage;
+      return garbage;
+    }
+}
+
+void display(ostream& out) const //显示队列里所有元素p371
+{  if(!empty()) {
+      NodePointer first=last->next, ptr=first;
+      do{//这里使用do-while更合适，考虑只包含一个节点的特殊情况，考虑改写成while的可能性？
+          out<<ptr->data<<" ";
+          ptr=ptr->next;
+     }while(ptr!=first) ;    
+}
